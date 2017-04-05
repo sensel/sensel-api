@@ -114,8 +114,16 @@ namespace Sensel
         internal SenselFrameData frame_data;
     }
 
-    public class SenselAPI
+    public static class SenselAPI
     {
+        static SenselAPI()
+        {
+            LoadLibrary(@"C:\Program Files\Sensel\SenselLib\" + (IntPtr.Size == 8 ? "x64" : "x86") + @"\LibSenselDecompress.dll");
+            LoadLibrary(@"C:\Program Files\Sensel\SenselLib\" + (IntPtr.Size == 8 ? "x64" : "x86") + @"\LibSensel.dll");
+        }
+
+        [DllImport("kernel32")]
+        private static extern IntPtr LoadLibrary(string fileName);
 
         [DllImport("LibSensel")]
         public extern static int senselGetDeviceList(ref SenselDeviceList device_list);
