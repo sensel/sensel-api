@@ -28,8 +28,6 @@
 #include "sensel_register_map.h"
 #include "sensel_register.h"
 
-#define SENSEL_PRESSURE
-
 #ifdef SENSEL_PRESSURE
 #include "sensel_decompress.h"
 #endif //SENSEL_PRESSURE
