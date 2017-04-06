@@ -1,0 +1,260 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		18C496181E95C8C8001652EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 18C496171E95C8C8001652EF /* main.c */; };
+		18C4961D1E95CC69001652EF /* libSensel.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C496191E95CB14001652EF /* libSensel.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		182C65DF1E7E18EE00CE22E5 /* SenselTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SenselTest; sourceTree = BUILT_PRODUCTS_DIR; };
+		187C8C921E803AAF00598F23 /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = "../../Library/Developer/Xcode/DerivedData/LibSensel-edphujmbtpuvmyggfsttetxwzeui/Build/Products/Debug/libSensel.dylib"; sourceTree = "<group>"; };
+		18C496171E95C8C8001652EF /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		18C496191E95CB14001652EF /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = ../../../../../../usr/local/lib/libSensel.dylib; sourceTree = "<group>"; };
+		18C4961A1E95CB14001652EF /* libSenselDecompress.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSenselDecompress.dylib; path = ../../../../../../usr/local/lib/libSenselDecompress.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		182C65DC1E7E18EE00CE22E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C4961D1E95CC69001652EF /* libSensel.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		182C65D61E7E18EE00CE22E5 = {
+			isa = PBXGroup;
+			children = (
+				18C496171E95C8C8001652EF /* main.c */,
+				182C65E01E7E18EE00CE22E5 /* Products */,
+				182C65EB1E7E196900CE22E5 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		182C65E01E7E18EE00CE22E5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				182C65DF1E7E18EE00CE22E5 /* SenselTest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		182C65EB1E7E196900CE22E5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18C496191E95CB14001652EF /* libSensel.dylib */,
+				18C4961A1E95CB14001652EF /* libSenselDecompress.dylib */,
+				187C8C921E803AAF00598F23 /* libSensel.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		182C65DE1E7E18EE00CE22E5 /* SenselTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 182C65E61E7E18EE00CE22E5 /* Build configuration list for PBXNativeTarget "SenselTest" */;
+			buildPhases = (
+				182C65DB1E7E18EE00CE22E5 /* Sources */,
+				182C65DC1E7E18EE00CE22E5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SenselTest;
+			productName = SenselLibTest;
+			productReference = 182C65DF1E7E18EE00CE22E5 /* SenselTest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		182C65D71E7E18EE00CE22E5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Sensel, Inc.";
+				TargetAttributes = {
+					182C65DE1E7E18EE00CE22E5 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q3CDE494RG;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 182C65DA1E7E18EE00CE22E5 /* Build configuration list for PBXProject "SenselCTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 182C65D61E7E18EE00CE22E5;
+			productRefGroup = 182C65E01E7E18EE00CE22E5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				182C65DE1E7E18EE00CE22E5 /* SenselTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		182C65DB1E7E18EE00CE22E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18C496181E95C8C8001652EF /* main.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		182C65E41E7E18EE00CE22E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		182C65E51E7E18EE00CE22E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		182C65E71E7E18EE00CE22E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = Q3CDE494RG;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		182C65E81E7E18EE00CE22E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = Q3CDE494RG;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		182C65DA1E7E18EE00CE22E5 /* Build configuration list for PBXProject "SenselCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				182C65E41E7E18EE00CE22E5 /* Debug */,
+				182C65E51E7E18EE00CE22E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		182C65E61E7E18EE00CE22E5 /* Build configuration list for PBXNativeTarget "SenselTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				182C65E71E7E18EE00CE22E5 /* Debug */,
+				182C65E81E7E18EE00CE22E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 182C65D71E7E18EE00CE22E5 /* Project object */;
+}

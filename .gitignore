@@ -273,3 +273,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+*.xcuserstate
+
+sensel-examples/sensel-c/SenselCTest.xcodeproj/xcuserdata/
+
+sensel-lib/Sensel.xcodeproj/xcuserdata/
