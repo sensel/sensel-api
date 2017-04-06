@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		18C496181E95C8C8001652EF /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 18C496171E95C8C8001652EF /* main.c */; };
+		189D41D31E95D23C006EE0FB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 189D41D21E95D23C006EE0FB /* main.c */; };
 		18C4961D1E95CC69001652EF /* libSensel.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C496191E95CB14001652EF /* libSensel.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		182C65DF1E7E18EE00CE22E5 /* SenselTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SenselTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		187C8C921E803AAF00598F23 /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = "../../Library/Developer/Xcode/DerivedData/LibSensel-edphujmbtpuvmyggfsttetxwzeui/Build/Products/Debug/libSensel.dylib"; sourceTree = "<group>"; };
-		18C496171E95C8C8001652EF /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		189D41D21E95D23C006EE0FB /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = "<group>"; };
 		18C496191E95CB14001652EF /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = ../../../../../../usr/local/lib/libSensel.dylib; sourceTree = "<group>"; };
 		18C4961A1E95CB14001652EF /* libSenselDecompress.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSenselDecompress.dylib; path = ../../../../../../usr/local/lib/libSenselDecompress.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -34,7 +34,7 @@
 		182C65D61E7E18EE00CE22E5 = {
 			isa = PBXGroup;
 			children = (
-				18C496171E95C8C8001652EF /* main.c */,
+				189D41D21E95D23C006EE0FB /* main.c */,
 				182C65E01E7E18EE00CE22E5 /* Products */,
 				182C65EB1E7E196900CE22E5 /* Frameworks */,
 			);
@@ -115,7 +115,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18C496181E95C8C8001652EF /* main.c in Sources */,
+				189D41D31E95D23C006EE0FB /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
