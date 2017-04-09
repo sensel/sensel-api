@@ -7,32 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		182C65AB1E7E161E00CE22E5 /* sensel_device.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C659F1E7E161E00CE22E5 /* sensel_device.h */; };
-		182C65AC1E7E161E00CE22E5 /* sensel_protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65A01E7E161E00CE22E5 /* sensel_protocol.h */; };
-		182C65AD1E7E161E00CE22E5 /* sensel_register_map.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65A11E7E161E00CE22E5 /* sensel_register_map.h */; };
 		182C65AE1E7E161E00CE22E5 /* sensel_register.c in Sources */ = {isa = PBXBuildFile; fileRef = 182C65A21E7E161E00CE22E5 /* sensel_register.c */; };
-		182C65AF1E7E161E00CE22E5 /* sensel_register.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65A31E7E161E00CE22E5 /* sensel_register.h */; };
 		182C65B11E7E161E00CE22E5 /* sensel_serial_linux.c in Sources */ = {isa = PBXBuildFile; fileRef = 182C65A51E7E161E00CE22E5 /* sensel_serial_linux.c */; };
-		182C65B31E7E161E00CE22E5 /* sensel_serial.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65A71E7E161E00CE22E5 /* sensel_serial.h */; };
-		182C65B41E7E161E00CE22E5 /* sensel_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65A81E7E161E00CE22E5 /* sensel_types.h */; };
 		182C65B51E7E161E00CE22E5 /* sensel.c in Sources */ = {isa = PBXBuildFile; fileRef = 182C65A91E7E161E00CE22E5 /* sensel.c */; };
-		182C65B61E7E161E00CE22E5 /* sensel.h in Headers */ = {isa = PBXBuildFile; fileRef = 182C65AA1E7E161E00CE22E5 /* sensel.h */; };
 		187C8C8F1E803A5600598F23 /* libSenselDecompress.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 187C8C8E1E803A5600598F23 /* libSenselDecompress.dylib */; };
-		18D359251E93EEAD008C1EE4 /* libSensel.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18D6D4861E7E155800F358C4 /* libSensel.dylib */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		18D359241E93EE9B008C1EE4 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/local/lib;
-			dstSubfolderSpec = 0;
-			files = (
-				18D359251E93EEAD008C1EE4 /* libSensel.dylib in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		182C659F1E7E161E00CE22E5 /* sensel_device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sensel_device.h; path = src/sensel_device.h; sourceTree = "<group>"; };
@@ -97,23 +76,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		18D6D4841E7E155700F358C4 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				182C65B31E7E161E00CE22E5 /* sensel_serial.h in Headers */,
-				182C65AC1E7E161E00CE22E5 /* sensel_protocol.h in Headers */,
-				182C65AF1E7E161E00CE22E5 /* sensel_register.h in Headers */,
-				182C65B61E7E161E00CE22E5 /* sensel.h in Headers */,
-				182C65AB1E7E161E00CE22E5 /* sensel_device.h in Headers */,
-				182C65B41E7E161E00CE22E5 /* sensel_types.h in Headers */,
-				182C65AD1E7E161E00CE22E5 /* sensel_register_map.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		18D6D4851E7E155700F358C4 /* Sensel */ = {
 			isa = PBXNativeTarget;
@@ -121,8 +83,6 @@
 			buildPhases = (
 				18D6D4821E7E155700F358C4 /* Sources */,
 				18D6D4831E7E155700F358C4 /* Frameworks */,
-				18D6D4841E7E155700F358C4 /* Headers */,
-				18D359241E93EE9B008C1EE4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
