@@ -32,13 +32,13 @@ debug: CFLAGSOPT :=
 debug: $(NAME)
 
 pressure: OBJPRFX := build/release/pressure/
-pressure: CFLAGS  += -I../sensel-lib-decomp/src -DSENSEL_PRESSURE
-pressure: LDFLAGS += -L../sensel-lib-decomp/$(OBJPRX) -lsenseldecompress
+pressure: CFLAGS  += -DSENSEL_PRESSURE
+pressure: LDFLAGS += -lsenseldecompress
 pressure: $(NAME)
 
 debug_pressure: OBJPRFX := build/debug/pressure/
-debug_pressure: CFLAGS  += -I../sensel-lib-decomp/src -DSENSEL_PRESSURE -g -DDEBUG
-debug_pressure: LDFLAGS += -L../sensel-lib-decomp/$(OBJPRX) -lsenseldecompress
+debug_pressure: CFLAGS  += -DSENSEL_PRESSURE -g -DDEBUG
+debug_pressure: LDFLAGS += -lsenseldecompress
 debug_pressure: CFLAGSOPT :=
 debug_pressure: $(NAME)
 
