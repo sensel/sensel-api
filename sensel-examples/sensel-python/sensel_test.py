@@ -27,11 +27,12 @@ def openSensel():
     handle = None
     (error, device_list) = sensel.getDeviceList()
     if device_list.num_devices != 0:
-        (error, handle) = sensel.openDeviceByID(device_list.devices[0].id)
+        (error, handle) = sensel.openDeviceByID(device_list.devices[0].idx)
     return handle
 
 def initFrame():
-    error = sensel.setFrameContent(handle, sensel.SENSEL_FRAME_CONTACTS_FLAG|sensel.SENSEL_FRAME_PRESSURE_FLAG)
+    error = sensel.setFrameContent(handle, sensel.FRAME_CONTENT_CONTACTS_MASK |
+        sensel.FRAME_CONTENT_PRESSURE_MASK |  sensel.FRAME_CONTENT_LABELS_MASK)
     (error, frame) = sensel.allocateFrameData(handle)
     error = sensel.startScanning(handle)
     return frame
@@ -48,9 +49,12 @@ def printFrame(frame):
         c = frame.contacts[n]
         print "Contact ID: ", c.id
     forces = "Forces: "
+    labels = "Labels: "
     for n in range(10):
         forces += "["+str(frame.force_array[n])+"]"
+        labels += "["+str(frame.labels_array[n])+"]"
     print forces
+    print labels
 
 def closeSensel(frame):
     error = sensel.freeFrameData(handle, frame)

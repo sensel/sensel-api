@@ -28,7 +28,7 @@ senselliblinux.deb installs the libraries into /usr/lib and the headers into /us
 
 ## sensel-examples
 
-The sensel-examples directory includes wrappers and examples for C, C&#35;, and Python to demonstrate how to use the sensel-libraries for each language. Each example reads the contacts, forces and labels. All of the contacts are output into the console. The first 16 forces and lables (starting at the top left and moving right) are also output to the console. 
+The sensel-examples directory includes wrappers and examples for C, C&#35;, and Python to demonstrate how to use the sensel-libraries for each language. Each example reads the contacts, forces and labels. All of the contacts are output into the console. The first 10 forces and lables (starting at the top left and moving right) are also output to the console. 
 
 ### sensel-c
 

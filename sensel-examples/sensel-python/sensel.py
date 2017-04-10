@@ -27,32 +27,33 @@ from sensel_register_map import *
 import platform
 
 sensel_lib = None
-
-SENSEL_FRAME_PRESSURE_FLAG = 0x01
-SENSEL_FRAME_LABELS_FLAG   = 0x02
-SENSEL_FRAME_CONTACTS_FLAG = 0x04
-SENSEL_FRAME_ACCEL_FLAG    = 0x08
-
-SENSEL_CONTACT_MASK_ELLIPSE        =   0x01
-SENSEL_CONTACT_MASK_DELTAS         =   0x02
-SENSEL_CONTACT_MASK_BOUNDING_BOX   =   0x04
-SENSEL_CONTACT_MASK_PEAK           =   0x08
-
-SENSEL_EVENT_CONTACT_INVALID = 0
-SENSEL_EVENT_CONTACT_START   = 1
-SENSEL_EVENT_CONTACT_MOVE    = 2
-SENSEL_EVENT_CONTACT_END     = 3
+sensel_lib_decompress = None
 
 SENSEL_MAX_DEVICES  = 16
+
+FRAME_CONTENT_PRESSURE_MASK = 0x01
+FRAME_CONTENT_LABELS_MASK   = 0x02
+FRAME_CONTENT_CONTACTS_MASK = 0x04
+FRAME_CONTENT_ACCEL_MASK    = 0x08
+
+CONTACT_MASK_ELLIPSE        =   0x01
+CONTACT_MASK_DELTAS         =   0x02
+CONTACT_MASK_BOUNDING_BOX   =   0x04
+CONTACT_MASK_PEAK           =   0x08
+
+CONTACT_INVALID = 0
+CONTACT_START   = 1
+CONTACT_MOVE    = 2
+CONTACT_END     = 3
 
 platform_name = platform.system()
 if platform_name == "Windows":
     python_is_x64 = sys.maxsize > 2**32
     if python_is_x64:
-        windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x64\\LibSenselDecompress.dll")
+        sensel_lib_decompress = windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x64\\LibSenselDecompress.dll")
         sensel_lib = windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x64\\LibSensel.dll")
     else:
-        windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x86\\LibSenselDecompress.dll")
+        sensel_lib_decompress = windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x86\\LibSenselDecompress.dll")
         sensel_lib = windll.LoadLibrary("C:\\Program Files\\Sensel\\SenselLib\\x86\\LibSensel.dll")
 elif platform_name == "Darwin":
     sensel_lib = cdll.LoadLibrary("/usr/local/lib/libSensel.dylib")
@@ -103,16 +104,14 @@ class SenselFrameData(Structure):
                 ("labels_array", POINTER(c_ubyte)),
                 ("accel_data", POINTER(SenselAccelData))]
 
-
 class SenselDeviceID(Structure):
-    _fields_ = [("id", c_ubyte), 
+    _fields_ = [("idx", c_ubyte), 
                 ("serial_num", c_ubyte*64), 
                 ("com_port", c_ubyte*64)] 
 
 class SenselDeviceList(Structure):
     _fields_ = [("num_devices", c_ubyte), 
                 ("devices", SenselDeviceID*SENSEL_MAX_DEVICES)] 
-
 
 def open():
     handle = c_void_p(0)
@@ -154,10 +153,30 @@ def freeFrameData(handle, frame):
     error = sensel_lib.senselFreeFrameData(handle, byref(frame))
     return error
 
+def setScanDetail(handle, detail):
+    c_detail = c_int(detail)
+    error = sensel_lib.senselSetScanDetail(handle, c_detail)
+    return error
+
+def getScanDetail(handle):
+    detail = c_int(0)
+    error = sensel_lib.senselGetScanDetail(handle, byref(detail))
+    return (error, detail.value)
+
+def getSupportedFrameContent(handle):
+    content = c_ubyte(0)
+    error = sensel_lib.senselGetSupportedFrameContent(handle, byref(content))
+    return (error, content.value)
+
 def setFrameContent(handle, content):
     c_content = c_ubyte(content)
     error = sensel_lib.senselSetFrameContent(handle, c_content)
     return error
+
+def getFrameContent(handle):
+    content = c_ubyte(0)
+    error = sensel_lib.senselGetFrameContent(handle, byref(content))
+    return (error, content.value)
 
 def startScanning(handle):
     error = sensel_lib.senselStartScanning(handle)
@@ -186,6 +205,16 @@ def setLEDBrightness(handle, led_id, brightness):
     error = sensel_lib.senselSetLEDBrightness(handle, c_led_id, c_brightness)
     return error;
 
+def setContactsMask(handle, mask):
+    c_mask = c_ubyte(mask)
+    error = sensel_lib.senselSetContactsMask(handle, c_mask)
+    return error
+
+def getFrameContent(handle):
+    mask = c_ubyte(0)
+    error = sensel_lib.senselGetContactsMask(handle, byref(mask))
+    return (error, content.value)
+
 def readReg(handle, reg, size):
     buf = (c_byte * size)()
     error = sensel_lib.senselReadReg(handle, c_ubyte(reg), c_ubyte(size), buf)
@@ -198,6 +227,12 @@ def writeReg(handle, reg, size, data):
 
 def readRegVS(handle, reg, size):
     buf = (c_byte * size)()
-    read_size = (c_int * 1)()
-    error = sensel_lib.senselReadRegVS(handle, c_ubyte(reg), c_ubyte(size), buf, read_size)
+    read_size = c_int(0)
+    error = sensel_lib.senselReadRegVS(handle, c_ubyte(reg), c_ubyte(size), buf, byref(read_size))
     return (error, buf, read_size)
+
+def writeRegVS(handle, reg, size, data):
+    buf = (c_byte * size)(*data)
+    write_size = c_int(0)
+    error = sensel_lib.senselReadRegVS(handle, c_ubyte(reg), c_ubyte(size), buf, byref(write_size))
+    return (error, write_size)
