@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SenselCTest", "SenselCTest.vcxproj", "{541EC4C8-A926-4D81-A81B-235A2771E9FC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloSensel", "example-1-hello-sensel\HelloSensel.vcxproj", "{541EC4C8-A926-4D81-A81B-235A2771E9FC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SenselContacts", "example-2-contacts\SenselContacts.vcxproj", "{0DD1CCD7-7560-48CA-961C-3B096E122C70}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SenselForces", "example-3-forces\SenselForces.vcxproj", "{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,22 @@ Global
 		{541EC4C8-A926-4D81-A81B-235A2771E9FC}.Release|x64.Build.0 = Release|x64
 		{541EC4C8-A926-4D81-A81B-235A2771E9FC}.Release|x86.ActiveCfg = Release|Win32
 		{541EC4C8-A926-4D81-A81B-235A2771E9FC}.Release|x86.Build.0 = Release|Win32
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Debug|x64.ActiveCfg = Debug|x64
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Debug|x64.Build.0 = Debug|x64
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Debug|x86.ActiveCfg = Debug|Win32
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Debug|x86.Build.0 = Debug|Win32
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Release|x64.ActiveCfg = Release|x64
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Release|x64.Build.0 = Release|x64
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Release|x86.ActiveCfg = Release|Win32
+		{0DD1CCD7-7560-48CA-961C-3B096E122C70}.Release|x86.Build.0 = Release|Win32
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Debug|x64.ActiveCfg = Debug|x64
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Debug|x64.Build.0 = Debug|x64
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Debug|x86.ActiveCfg = Debug|Win32
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Debug|x86.Build.0 = Debug|Win32
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Release|x64.ActiveCfg = Release|x64
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Release|x64.Build.0 = Release|x64
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Release|x86.ActiveCfg = Release|Win32
+		{F3F13D83-FCC9-4C93-A3AE-8C50DFBF3849}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

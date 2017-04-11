@@ -34,18 +34,21 @@ namespace Sensel
             IntPtr handle = new IntPtr(0);
             SenselFrame frame = new SenselFrame();
             SenselDeviceList list = new SenselDeviceList();
+            SenselSensorInfo sensor_info = new SenselSensorInfo();
+            float total_force = 0;
             list.num_devices = 0;
             Sensel.senselGetDeviceList(ref list);
             Console.WriteLine("Num Devices: " + list.num_devices);
             if (list.num_devices != 0)
             {
                 Sensel.senselOpenDeviceByID(ref handle, list.devices[0].idx);
-                Sensel.senselSetFrameContent(handle, 15);
+                Sensel.senselSetFrameContent(handle, 1);
                 Sensel.senselAllocateFrameData(handle, frame);
                 Sensel.senselStartScanning(handle);
             }
             if (handle.ToInt64() != 0)
             {
+                Sensel.senselGetSensorInfo(handle, ref sensor_info);
                 for (int c = 0; c < 500; c++)
                 {
                     Int32 num_frames = 0;
@@ -54,20 +57,12 @@ namespace Sensel
                     for (int f = 0; f < num_frames; f++)
                     {
                         Sensel.senselGetFrame(handle, frame);
-                        Console.WriteLine("Num Contacts: " + frame.n_contacts);
-                        for (int i = 0; i < frame.n_contacts; i++)
+                        total_force = 0;
+                        for(int i =0; i < sensor_info.num_cols*sensor_info.num_rows; i++)
                         {
-                            Console.WriteLine("Contact ID: " + frame.contacts[i].id);
+                            total_force = total_force + frame.force_array[i];
                         }
-                        String forces = "Forces: ";
-                        String labels = "Labels: ";
-                        for(int i = 0; i < 10; i++)
-                        {
-                            forces += "[" + frame.force_array[i] + "]";
-                            labels += "[" + frame.labels_array[i] + "]";
-                        }
-                        Console.WriteLine(forces);
-                        Console.WriteLine(labels);
+                        Console.WriteLine("Total Force: " +total_force);
                     }
                 }
 

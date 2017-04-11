@@ -31,30 +31,23 @@ def openSensel():
     return handle
 
 def initFrame():
-    error = sensel.setFrameContent(handle, sensel.FRAME_CONTENT_CONTACTS_MASK |
-        sensel.FRAME_CONTENT_PRESSURE_MASK |  sensel.FRAME_CONTENT_LABELS_MASK)
+    error = sensel.setFrameContent(handle, sensel.FRAME_CONTENT_PRESSURE_MASK)
     (error, frame) = sensel.allocateFrameData(handle)
     error = sensel.startScanning(handle)
     return frame
 
-def scanFrames(frame):
+def scanFrames(frame, info):
     error = sensel.readSensor(handle)
     (error, num_frames) = sensel.getNumAvailableFrames(handle)
     for i in range(num_frames):
         error = sensel.getFrame(handle, frame)
+        printFrame(frame, info)
 
-def printFrame(frame):
-    print "Num Contacts: ", frame.n_contacts
-    for n in range(frame.n_contacts):
-        c = frame.contacts[n]
-        print "Contact ID: ", c.id
-    forces = "Forces: "
-    labels = "Labels: "
-    for n in range(10):
-        forces += "["+str(frame.force_array[n])+"]"
-        labels += "["+str(frame.labels_array[n])+"]"
-    print forces
-    print labels
+def printFrame(frame, info):
+    total_force = 0.0
+    for n in range(info.num_rows*info.num_cols):
+        total_force += frame.force_array[n]
+    print "Total Force: "+str(total_force)
 
 def closeSensel(frame):
     error = sensel.freeFrameData(handle, frame)
@@ -64,9 +57,9 @@ def closeSensel(frame):
 if __name__ == "__main__":
     handle = openSensel()
     if handle != None:
+        (error, info) = sensel.getSensorInfo(handle)
         frame = initFrame()
         for i in range(500):
-            scanFrames(frame)
-            printFrame(frame)
+            scanFrames(frame, info)
         closeSensel(frame)
     

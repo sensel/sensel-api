@@ -22,7 +22,7 @@
     <ClCompile Include="src\main.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{541EC4C8-A926-4D81-A81B-235A2771E9FC}</ProjectGuid>
+    <ProjectGuid>{0DD1CCD7-7560-48CA-961C-3B096E122C70}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -71,21 +71,21 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\build\x86\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)\build\x86\$(Configuration)\</OutDir>
     <IntDir>build\x86\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\build\x86\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)\build\x86\$(Configuration)\</OutDir>
     <IntDir>build\x86\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)\build\x64\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)\build\x64\$(Configuration)\</OutDir>
     <IntDir>build\x64\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)\build\x64\$(Configuration)\</OutDir>
+    <OutDir>$(ProjectDir)\build\x64\$(Configuration)\</OutDir>
     <IntDir>build\x64\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>

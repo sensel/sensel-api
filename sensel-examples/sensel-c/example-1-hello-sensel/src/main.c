@@ -30,7 +30,8 @@ int main(int argc, char **argv)
 {
     SenselDeviceList list;
     SENSEL_HANDLE handle = NULL;
-    SenselFrameData *frame = NULL;
+	SenselFirmwareInfo fw_info;
+	SenselSensorInfo sensor_info;
     
 	senselGetDeviceList(&list);
 	if (list.num_devices == 0)
@@ -39,36 +40,15 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	senselOpenDeviceByID(&handle, list.devices[0].idx);
-	
-	senselSetFrameContent(handle, FRAME_CONTENT_PRESSURE_MASK | FRAME_CONTENT_LABELS_MASK | FRAME_CONTENT_CONTACTS_MASK);
-	senselAllocateFrameData(handle, &frame);
-	senselStartScanning(handle);
-	for (int c = 0; c < TEST_SCAN_NUM_LOOPS; c++)
-	{
-		unsigned int num_frames = 0;
-		senselReadSensor(handle);
-		senselGetNumAvailableFrames(handle, &num_frames);
-		for (int f = 0; f < num_frames; f++)
-		{
-			senselGetFrame(handle, frame);
-			fprintf(stdout, "Num Contacts: %d\n", frame->n_contacts);
-            for (int i = 0; i < frame->n_contacts; i++)
-            {
-                fprintf(stdout, "Contact ID: %d\n", frame->contacts[i].id);
-            }
-            fprintf(stdout, "Forces:");
-            for (int i = 0; i < 10; i++)
-            {
-                fprintf(stdout, " [%f] ", frame->force_array[i]);
-            }
-            fprintf(stdout, "\n");
-            fprintf(stdout, "Labels:");
-            for (int i = 0; i < 10; i++)
-            {
-                fprintf(stdout, " [%d] ", frame->labels_array[i]);
-            }
-            fprintf(stdout, "\n");
-		}
-	}
+	senselGetFirmwareInfo(handle, &fw_info);
+	senselGetSensorInfo(handle, &sensor_info);
+
+	fprintf(stdout, "\nSensel Device: %s\n" ,list.devices[0].serial_num );
+	fprintf(stdout, "Firmware Version: %d.%d.%d\n", fw_info.fw_version_major, fw_info.fw_version_minor, fw_info.fw_version_build);
+	fprintf(stdout, "Width: %fmm\n", sensor_info.width);
+	fprintf(stdout, "Height: %fmm\n", sensor_info.height);
+	fprintf(stdout, "Cols: %d\n", sensor_info.num_cols);
+	fprintf(stdout, "Rows: %d\n", sensor_info.num_rows);
+	Sleep(4000);
 	return 0;
 }

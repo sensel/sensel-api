@@ -1,4 +1,4 @@
-NAME = senseltest
+NAME = hellosensel
 
 SRC = main.c
 
