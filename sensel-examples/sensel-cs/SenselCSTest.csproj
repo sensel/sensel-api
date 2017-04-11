@@ -83,8 +83,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SenselAPI.cs" />
-    <Compile Include="SenselAPITest.cs" />
+    <Compile Include="Sensel.cs" />
+    <Compile Include="SenselTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

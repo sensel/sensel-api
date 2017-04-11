@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
 namespace Sensel
 {
-    class SenselAPITest
+    class SenselTest
     {
 
         static void Main(string[] args)
@@ -35,25 +35,25 @@ namespace Sensel
             SenselFrame frame = new SenselFrame();
             SenselDeviceList list = new SenselDeviceList();
             list.num_devices = 0;
-            SenselAPI.senselGetDeviceList(ref list);
+            Sensel.senselGetDeviceList(ref list);
             Console.WriteLine("Num Devices: " + list.num_devices);
             if (list.num_devices != 0)
             {
-                SenselAPI.senselOpenDeviceByID(ref handle, list.devices[0].idx);
-                SenselAPI.senselSetFrameContent(handle, 15);
-                SenselAPI.senselAllocateFrame(handle, frame);
-                SenselAPI.senselStartScanning(handle);
+                Sensel.senselOpenDeviceByID(ref handle, list.devices[0].idx);
+                Sensel.senselSetFrameContent(handle, 15);
+                Sensel.senselAllocateFrame(handle, frame);
+                Sensel.senselStartScanning(handle);
             }
             if (handle.ToInt64() != 0)
             {
                 for (int c = 0; c < 500; c++)
                 {
                     Int32 num_frames = 0;
-                    SenselAPI.senselReadSensor(handle);
-                    SenselAPI.senselGetNumAvailableFrames(handle, ref num_frames);
+                    Sensel.senselReadSensor(handle);
+                    Sensel.senselGetNumAvailableFrames(handle, ref num_frames);
                     for (int f = 0; f < num_frames; f++)
                     {
-                        SenselAPI.senselGetFrame(handle, frame);
+                        Sensel.senselGetFrame(handle, frame);
                         Console.WriteLine("Num Contacts: " + frame.frame_data.n_contacts);
                         for (int i = 0; i < frame.n_contacts; i++)
                         {
@@ -62,8 +62,8 @@ namespace Sensel
                     }
                 }
 
-                SenselAPI.senselStopScanning(handle);
-                SenselAPI.senselClose(handle);
+                Sensel.senselStopScanning(handle);
+                Sensel.senselClose(handle);
             }
         }
     }

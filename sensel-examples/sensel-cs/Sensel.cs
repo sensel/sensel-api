@@ -114,9 +114,9 @@ namespace Sensel
         internal SenselFrameData frame_data;
     }
 
-    public static class SenselAPI
+    public static class Sensel
     {
-        static SenselAPI()
+        static Sensel()
         {
             LoadLibrary(@"C:\Program Files\Sensel\SenselLib\" + (IntPtr.Size == 8 ? "x64" : "x86") + @"\LibSenselDecompress.dll");
             LoadLibrary(@"C:\Program Files\Sensel\SenselLib\" + (IntPtr.Size == 8 ? "x64" : "x86") + @"\LibSensel.dll");
@@ -162,7 +162,7 @@ namespace Sensel
         public static int senselAllocateFrame(IntPtr handle, SenselFrame frame)
         {
             SenselSensorInfo info = new SenselSensorInfo();
-            SenselAPI.senselGetSensorInfo(handle, ref info);
+            Sensel.senselGetSensorInfo(handle, ref info);
             frame.contacts = new SenselContact[info.max_contacts];
             for (int i = 0; i < info.max_contacts; i++)
                 frame.contacts[i] = new SenselContact();
@@ -171,13 +171,13 @@ namespace Sensel
             frame.accel_data = new SenselAccelData();
             frame.frame_data = new SenselFrameData();
 
-            SenselAPI.senselAllocateFrameData(handle, ref frame.frame_data);
+            Sensel.senselAllocateFrameData(handle, ref frame.frame_data);
             return 0;
         }
 
         public static int senselGetFrame(IntPtr handle, SenselFrame frame)
         {
-            SenselAPI.senselGetFrame(handle, frame.frame_data);
+            Sensel.senselGetFrame(handle, frame.frame_data);
             frame.n_contacts = frame.frame_data.n_contacts;
             long ptrIndex = (frame.frame_data.contacts).ToInt64();
             for (int i = 0; i < frame.frame_data.n_contacts; i++)
