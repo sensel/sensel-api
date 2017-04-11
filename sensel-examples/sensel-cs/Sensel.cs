@@ -159,13 +159,10 @@ namespace Sensel
         private extern static int senselGetFrame(IntPtr handle, SenselFrameData data);
 
 
-        public static int senselAllocateFrame(IntPtr handle, SenselFrame frame)
+        public static int senselAllocateFrameData(IntPtr handle, SenselFrame frame)
         {
             SenselSensorInfo info = new SenselSensorInfo();
             Sensel.senselGetSensorInfo(handle, ref info);
-            frame.contacts = new SenselContact[info.max_contacts];
-            for (int i = 0; i < info.max_contacts; i++)
-                frame.contacts[i] = new SenselContact();
             frame.force_array = new float[info.num_rows * info.num_cols];
             frame.labels_array = new byte[info.num_rows * info.num_cols];
             frame.accel_data = new SenselAccelData();
@@ -179,8 +176,9 @@ namespace Sensel
         {
             Sensel.senselGetFrame(handle, frame.frame_data);
             frame.n_contacts = frame.frame_data.n_contacts;
+            frame.contacts = new SenselContact[frame.n_contacts];
             long ptrIndex = (frame.frame_data.contacts).ToInt64();
-            for (int i = 0; i < frame.frame_data.n_contacts; i++)
+            for (int i = 0; i < frame.n_contacts; i++)
             {
                 IntPtr cPtr = new IntPtr(ptrIndex);
                 frame.contacts[i] = (SenselContact)Marshal.PtrToStructure(cPtr, typeof(SenselContact));

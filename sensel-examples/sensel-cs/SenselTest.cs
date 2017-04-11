@@ -41,7 +41,7 @@ namespace Sensel
             {
                 Sensel.senselOpenDeviceByID(ref handle, list.devices[0].idx);
                 Sensel.senselSetFrameContent(handle, 15);
-                Sensel.senselAllocateFrame(handle, frame);
+                Sensel.senselAllocateFrameData(handle, frame);
                 Sensel.senselStartScanning(handle);
             }
             if (handle.ToInt64() != 0)
@@ -54,11 +54,20 @@ namespace Sensel
                     for (int f = 0; f < num_frames; f++)
                     {
                         Sensel.senselGetFrame(handle, frame);
-                        Console.WriteLine("Num Contacts: " + frame.frame_data.n_contacts);
+                        Console.WriteLine("Num Contacts: " + frame.n_contacts);
                         for (int i = 0; i < frame.n_contacts; i++)
                         {
-                            Console.WriteLine("ID: " + frame.contacts[i].id);
+                            Console.WriteLine("Contact ID: " + frame.contacts[i].id);
                         }
+                        String forces = "Forces: ";
+                        String labels = "Labels: ";
+                        for(int i = 0; i < 10; i++)
+                        {
+                            forces += "[" + frame.force_array[i] + "]";
+                            labels += "[" + frame.labels_array[i] + "]";
+                        }
+                        Console.WriteLine(forces);
+                        Console.WriteLine(labels);
                     }
                 }
 
