@@ -7,126 +7,124 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		189D41D31E95D23C006EE0FB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 189D41D21E95D23C006EE0FB /* main.c */; };
-		18C4961D1E95CC69001652EF /* libSensel.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C496191E95CB14001652EF /* libSensel.dylib */; };
+		1858F3CB1E9DA0DE005F9DA5 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 1858F3CA1E9DA0DE005F9DA5 /* main.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1858F3BE1E9DA0BA005F9DA5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		182C65DF1E7E18EE00CE22E5 /* SenselTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SenselTest; sourceTree = BUILT_PRODUCTS_DIR; };
-		187C8C921E803AAF00598F23 /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = "../../Library/Developer/Xcode/DerivedData/LibSensel-edphujmbtpuvmyggfsttetxwzeui/Build/Products/Debug/libSensel.dylib"; sourceTree = "<group>"; };
-		189D41D21E95D23C006EE0FB /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = "<group>"; };
-		18C496191E95CB14001652EF /* libSensel.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSensel.dylib; path = ../../../../../../usr/local/lib/libSensel.dylib; sourceTree = "<group>"; };
-		18C4961A1E95CB14001652EF /* libSenselDecompress.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSenselDecompress.dylib; path = ../../../../../../usr/local/lib/libSenselDecompress.dylib; sourceTree = "<group>"; };
+		1858F3C01E9DA0BA005F9DA5 /* HelloSensel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HelloSensel; sourceTree = BUILT_PRODUCTS_DIR; };
+		1858F3CA1E9DA0DE005F9DA5 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		182C65DC1E7E18EE00CE22E5 /* Frameworks */ = {
+		1858F3BD1E9DA0BA005F9DA5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18C4961D1E95CC69001652EF /* libSensel.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		182C65D61E7E18EE00CE22E5 = {
+		1858F3B71E9DA0BA005F9DA5 = {
 			isa = PBXGroup;
 			children = (
-				189D41D21E95D23C006EE0FB /* main.c */,
-				182C65E01E7E18EE00CE22E5 /* Products */,
-				182C65EB1E7E196900CE22E5 /* Frameworks */,
+				1858F3CA1E9DA0DE005F9DA5 /* main.c */,
+				1858F3C11E9DA0BA005F9DA5 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		182C65E01E7E18EE00CE22E5 /* Products */ = {
+		1858F3C11E9DA0BA005F9DA5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				182C65DF1E7E18EE00CE22E5 /* SenselTest */,
+				1858F3C01E9DA0BA005F9DA5 /* HelloSensel */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		182C65EB1E7E196900CE22E5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				18C496191E95CB14001652EF /* libSensel.dylib */,
-				18C4961A1E95CB14001652EF /* libSenselDecompress.dylib */,
-				187C8C921E803AAF00598F23 /* libSensel.dylib */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		182C65DE1E7E18EE00CE22E5 /* SenselTest */ = {
+		1858F3BF1E9DA0BA005F9DA5 /* HelloSensel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 182C65E61E7E18EE00CE22E5 /* Build configuration list for PBXNativeTarget "SenselTest" */;
+			buildConfigurationList = 1858F3C71E9DA0BA005F9DA5 /* Build configuration list for PBXNativeTarget "HelloSensel" */;
 			buildPhases = (
-				182C65DB1E7E18EE00CE22E5 /* Sources */,
-				182C65DC1E7E18EE00CE22E5 /* Frameworks */,
+				1858F3BC1E9DA0BA005F9DA5 /* Sources */,
+				1858F3BD1E9DA0BA005F9DA5 /* Frameworks */,
+				1858F3BE1E9DA0BA005F9DA5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SenselTest;
-			productName = SenselLibTest;
-			productReference = 182C65DF1E7E18EE00CE22E5 /* SenselTest */;
+			name = HelloSensel;
+			productName = HelloSensel;
+			productReference = 1858F3C01E9DA0BA005F9DA5 /* HelloSensel */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		182C65D71E7E18EE00CE22E5 /* Project object */ = {
+		1858F3B81E9DA0BA005F9DA5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Sensel, Inc.";
 				TargetAttributes = {
-					182C65DE1E7E18EE00CE22E5 = {
-						CreatedOnToolsVersion = 8.2.1;
+					1858F3BF1E9DA0BA005F9DA5 = {
+						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = Q3CDE494RG;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 182C65DA1E7E18EE00CE22E5 /* Build configuration list for PBXProject "SenselCTest" */;
+			buildConfigurationList = 1858F3BB1E9DA0BA005F9DA5 /* Build configuration list for PBXProject "HelloSensel" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 182C65D61E7E18EE00CE22E5;
-			productRefGroup = 182C65E01E7E18EE00CE22E5 /* Products */;
+			mainGroup = 1858F3B71E9DA0BA005F9DA5;
+			productRefGroup = 1858F3C11E9DA0BA005F9DA5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				182C65DE1E7E18EE00CE22E5 /* SenselTest */,
+				1858F3BF1E9DA0BA005F9DA5 /* HelloSensel */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		182C65DB1E7E18EE00CE22E5 /* Sources */ = {
+		1858F3BC1E9DA0BA005F9DA5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				189D41D31E95D23C006EE0FB /* main.c in Sources */,
+				1858F3CB1E9DA0DE005F9DA5 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		182C65E41E7E18EE00CE22E5 /* Debug */ = {
+		1858F3C51E9DA0BA005F9DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -169,11 +167,12 @@
 			};
 			name = Debug;
 		};
-		182C65E51E7E18EE00CE22E5 /* Release */ = {
+		1858F3C61E9DA0BA005F9DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -209,52 +208,50 @@
 			};
 			name = Release;
 		};
-		182C65E71E7E18EE00CE22E5 /* Debug */ = {
+		1858F3C81E9DA0BA005F9DA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q3CDE494RG;
 				HEADER_SEARCH_PATHS = /usr/local/include;
-				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lsensel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
-		182C65E81E7E18EE00CE22E5 /* Release */ = {
+		1858F3C91E9DA0BA005F9DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q3CDE494RG;
 				HEADER_SEARCH_PATHS = /usr/local/include;
-				LD_RUNPATH_SEARCH_PATHS = /usr/local/lib;
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				OTHER_LDFLAGS = "-lsensel";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SYSTEM_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		182C65DA1E7E18EE00CE22E5 /* Build configuration list for PBXProject "SenselCTest" */ = {
+		1858F3BB1E9DA0BA005F9DA5 /* Build configuration list for PBXProject "HelloSensel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				182C65E41E7E18EE00CE22E5 /* Debug */,
-				182C65E51E7E18EE00CE22E5 /* Release */,
+				1858F3C51E9DA0BA005F9DA5 /* Debug */,
+				1858F3C61E9DA0BA005F9DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		182C65E61E7E18EE00CE22E5 /* Build configuration list for PBXNativeTarget "SenselTest" */ = {
+		1858F3C71E9DA0BA005F9DA5 /* Build configuration list for PBXNativeTarget "HelloSensel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				182C65E71E7E18EE00CE22E5 /* Debug */,
-				182C65E81E7E18EE00CE22E5 /* Release */,
+				1858F3C81E9DA0BA005F9DA5 /* Debug */,
+				1858F3C91E9DA0BA005F9DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 182C65D71E7E18EE00CE22E5 /* Project object */;
+	rootObject = 1858F3B81E9DA0BA005F9DA5 /* Project object */;
 }

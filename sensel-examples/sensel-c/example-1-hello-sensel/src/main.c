@@ -49,6 +49,5 @@ int main(int argc, char **argv)
 	fprintf(stdout, "Height: %fmm\n", sensor_info.height);
 	fprintf(stdout, "Cols: %d\n", sensor_info.num_cols);
 	fprintf(stdout, "Rows: %d\n", sensor_info.num_rows);
-	Sleep(4000);
 	return 0;
 }
