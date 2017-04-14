@@ -12,7 +12,7 @@ OBJPRFX = build/release/nopressure/
 
 CC = gcc
 
-CFLAGS = -c -std=c99 -Wall -Wpedantic -Werror -fPIC -fvisibility=hidden -Isrc/ -DSENSEL_EXPORTS 
+CFLAGS = -c -std=c99 -Wall -Werror -fPIC -fvisibility=hidden -Isrc/ -DSENSEL_EXPORTS 
 
 LDFLAGS = 
 

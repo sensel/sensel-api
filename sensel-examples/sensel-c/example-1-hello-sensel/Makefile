@@ -10,7 +10,7 @@ OBJPRFX = build/
 
 CC = gcc
 
-CFLAGS = -c -std=c99 -Wall -Wpedantic -Werror -O2
+CFLAGS = -c -std=c99 -Wall -Werror -O2
 
 LDFLAGS = -lsensel 
 

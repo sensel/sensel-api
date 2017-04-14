@@ -276,3 +276,5 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+
+build/
