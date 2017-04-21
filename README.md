@@ -1,3 +1,5 @@
+# ALPHA RELEASE. More documentation to be added. 
+
 # Sensel API
 
 The Sensel API allows users to communicate with Sensel devices. 
