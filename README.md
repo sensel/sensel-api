@@ -6,6 +6,8 @@ The Sensel API allows users to communicate with Sensel devices.
 
 ## Getting Started
 
+Before getting started with this API, make sure your device's firmware is up to date. Go to [Sensel's Start Page](http://sensel.com/start) to get the latest version of the SenselApp and update your device.
+
 To run the examples, first install the Sensel libraries found in sensel-install. After installing the libraries, you can open one of the Sensel source examples (C, Python and C&#35;). 
 
 The source for the central Sensel library can be found in sensel-lib. This includes all of the necessary functions to communicate with Sensel devices except for force frame decompression. More information can be found below.
