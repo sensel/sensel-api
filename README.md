@@ -32,25 +32,41 @@ senselliblinux.deb installs the libraries into /usr/lib and the headers into /us
 
 The sensel-examples directory includes wrappers and examples for C, C&#35;, and Python to demonstrate how to use the sensel-libraries for each language. Each example reads the contacts, forces and labels. All of the contacts are output into the console. The first 10 forces and lables (starting at the top left and moving right) are also output to the console. 
 
-### sensel-c
+### Sensel Example Languages
+
+#### sensel-c
 
 No wrapper is required for the sensel-c test. After installing the libraries, simply run the example in Visual Studio for Windows, xCode for Mac, and the Makefile for Linux.
 
-### sensel-python
+#### sensel-python
 
 After installing the libraries, the Python example can be run using 'python sensel_test.py'. 
 
 The Python wrapper can be found in sensel.py and should detect your operating system and whether it is a 32-bit or 64-bit process.
 
-### sensel-cs
+#### sensel-cs
 
 The Sensel C&#35; example can be run on a Windows machine in Visual Studio after the libraries have been installed.
 
 The C&#35; wrapper can be found in SenselAPI.cs and can dynamically load either the 32-bit or 64-bit library. 
 
+### Sensel Examples
+
+#### example-1-hello-sensel
+
+Example 1 demonstrates how to find Sensel devices, open the device, and request information about from the device. 
+
+#### example-2-contacts
+
+Example 2 demonstrates how to connect to a Sensel Device, start scanning for contacts, and read a frame of data for contacts.
+
+#### example-3-forces
+
+Example 3 demonstrates how to connect to a Sensel Device, start scanning for forces, and read a frame of force data. In this example, all the forces are being summed to report the total force.
+
 ## sensel-lib
 
-The sensel-lib directory contains the source for the core Sensel library. LibSensel is covered under the MIT license. LibSensel contains the main functionality for communicating with Sensel devices, but does not include force frame decompression, which is contianed in LibSenselDecompress. Both libraries are included in the installers found in sensel-install, but LibSensel can be recompiled to be a standalone library (no dependencies on LibSenselDecompress) or to replace the existing LibSensel and support force frames.
+The sensel-lib directory contains the source for the core Sensel library. LibSensel is covered under the MIT license. LibSensel contains the main functionality for communicating with Sensel devices, but does not include force frame decompression, which is contained in LibSenselDecompress. Both libraries are included in the installers found in sensel-install, but LibSensel can be recompiled to be a standalone library (no dependencies on LibSenselDecompress) or to replace the existing LibSensel and support force frames.
 
 ### Build without Forces (Standalone)
 
