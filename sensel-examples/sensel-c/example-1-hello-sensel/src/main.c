@@ -24,23 +24,30 @@
 #include "sensel.h"
 #include "sensel_device.h"
 
-#define TEST_SCAN_NUM_LOOPS 500
-
 int main(int argc, char **argv)
 {
+	//Handle that references a Sensel device
+	SENSEL_HANDLE handle = NULL;
+	//List of all available Sensel devices
     SenselDeviceList list;
-    SENSEL_HANDLE handle = NULL;
+	//Firmware info from the Sensel device
 	SenselFirmwareInfo fw_info;
+	//Sensor info from the Sensel device
 	SenselSensorInfo sensor_info;
     
+	//Get a list of avaialble Sensel devices
 	senselGetDeviceList(&list);
 	if (list.num_devices == 0)
 	{
 		fprintf(stdout, "No device found\n");
 		return 0;
 	}
+
+	//Open a Sensel device by the id in the SenselDeviceList, handle initialized 
 	senselOpenDeviceByID(&handle, list.devices[0].idx);
+	//Get the firmware info
 	senselGetFirmwareInfo(handle, &fw_info);
+	//Get the sensor info
 	senselGetSensorInfo(handle, &sensor_info);
 
 	fprintf(stdout, "\nSensel Device: %s\n" ,list.devices[0].serial_num );

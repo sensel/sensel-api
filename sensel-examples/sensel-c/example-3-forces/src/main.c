@@ -24,36 +24,53 @@
 #include "sensel.h"
 #include "sensel_device.h"
 
+//The number of times the example should read from the Sensel device before exiting
 #define TEST_SCAN_NUM_LOOPS 500
 
 int main(int argc, char **argv)
 {
-    SenselDeviceList list;
-    SENSEL_HANDLE handle = NULL;
-    SenselFrameData *frame = NULL;
+	//Handle that references a Sensel device
+	SENSEL_HANDLE handle = NULL;
+	//List of all available Sensel devices
+	SenselDeviceList list;
+	//Sensor info from the Sensel device
 	SenselSensorInfo sensor_info;
+	//SenselFrame data that will hold the forces
+    SenselFrameData *frame = NULL;
+	//Total of all forces in SenselFrame force_array
 	float total_force = 0.0f;
 
+	//Get a list of avaialble Sensel devices
 	senselGetDeviceList(&list);
 	if (list.num_devices == 0)
 	{
 		fprintf(stdout, "No device found\n");
 		return 0;
 	}
+
+	//Open a Sensel device by the id in the SenselDeviceList, handle initialized 
 	senselOpenDeviceByID(&handle, list.devices[0].idx);
+	//Get the sensor info
 	senselGetSensorInfo(handle, &sensor_info);
 	
+	//Set the frame content to scan force data
 	senselSetFrameContent(handle, FRAME_CONTENT_PRESSURE_MASK);
+	//Allocate a frame of data, must be done before reading frame data
 	senselAllocateFrameData(handle, &frame);
+	//Start scanning the Sensel device
 	senselStartScanning(handle);
 	for (int c = 0; c < TEST_SCAN_NUM_LOOPS; c++)
 	{
 		unsigned int num_frames = 0;
+		//Read all available data from the Sensel device
 		senselReadSensor(handle);
+		//Get number of frames available in the data read from the sensor
 		senselGetNumAvailableFrames(handle, &num_frames);
 		for (int f = 0; f < num_frames; f++)
 		{
+			//Read one frame of data
 			senselGetFrame(handle, frame);
+			//Calculate the total force
 			total_force = 0;
             for (int i = 0; i < sensor_info.num_cols*sensor_info.num_rows; i++)
             {
