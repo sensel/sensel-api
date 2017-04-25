@@ -83,12 +83,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sensel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SenselForces.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sensel-wrapper-cs\SenselWrapperCS.csproj">
+      <Project>{b5eca380-4318-44c1-b6ab-6d38a2823839}</Project>
+      <Name>SenselWrapperCS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
