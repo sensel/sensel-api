@@ -1,8 +1,13 @@
-# ALPHA RELEASE. More documentation to be added. 
-
 # Sensel API
 
 The Sensel API allows users to communicate with Sensel devices. 
+
+[Sensel API Primer](http://guide.sensel.com/api/)
+
+[Sensel Lib Documentation](http://guide.sensel.com/sensel_h/)
+
+[Sensel Decompress Lib Documentation](http://guide.sensel.com/sensel_decompress_h/)
+
 
 ## Getting Started
 
