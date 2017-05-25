@@ -22,6 +22,8 @@
 * SOFTWARE.
 ******************************************************************************************/
 
+//TODO: Right now, anyone that uses the API has to allocate arrays for labels and force images, even if they're only using contacts. This should not be the case
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -109,7 +111,7 @@ static SenselStatus _senselGetPrvFirmwareInfo(SENSEL_HANDLE handle, SenselFirmwa
 
   fw_info->fw_protocol_version = prtcl_fw_info.fw_protocol_version;
   fw_info->fw_version_major    = prtcl_fw_info.fw_version_major;
-  fw_info->fw_version_major    = prtcl_fw_info.fw_version_minor;
+  fw_info->fw_version_minor    = prtcl_fw_info.fw_version_minor;
   fw_info->fw_version_build    = prtcl_fw_info.fw_version_build;
   fw_info->fw_version_release  = prtcl_fw_info.fw_version_release;
   fw_info->device_id           = prtcl_fw_info.device_id;
@@ -1115,20 +1117,6 @@ SenselStatus WINAPI senselGetContactsMask(SENSEL_HANDLE handle, unsigned char *m
 }
 
 SENSEL_API
-SenselStatus WINAPI senselGetBaselineEnabled(SENSEL_HANDLE handle, unsigned char *val)
-{
-  return senselReadReg(handle, SENSEL_REG_BASELINE_ENABLED, 1, val);
-}
-
-SENSEL_API
-SenselStatus WINAPI senselSetBaselineEnabled(SENSEL_HANDLE handle, unsigned char val)
-{
-  val = (val ? 1 : 0);
-
-  return senselWriteReg(handle, SENSEL_REG_BASELINE_ENABLED, 1, &val);
-}
-
-SENSEL_API
 SenselStatus WINAPI senselSetDynamicBaselineEnabled(SENSEL_HANDLE handle, unsigned char val)
 {
   SenselStatus  status;
@@ -1291,15 +1279,14 @@ static SenselStatus _senselInitHandle(SENSEL_HANDLE handle)
     {
       printf("Error allocating memory for LED array\n");
     }
+    status = _senselGetAllLEDBrightness(handle);
+    if (status != SENSEL_OK)
+      return status;
   }
   else
   {
     device->led_array = NULL;
   }
-
-  status = _senselGetAllLEDBrightness(handle);
-  if (status != SENSEL_OK)
-    return status;
 
   return SENSEL_OK;
 }

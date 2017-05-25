@@ -60,15 +60,13 @@
 extern "C" {
 #endif
 
-  /*
-   * Name       : SENSEL_HANDLE
-   * Description: Handle to a Sensel device
+  /*!
+   * @discussion Handle to a Sensel device
    */
   typedef void *SENSEL_HANDLE;
 
-  /*
-   * Name       : SenselStatus
-   * Description: Status returned by API calls
+  /*!
+   * @discussion Status returned by API calls
    */
   typedef enum
   {
@@ -76,9 +74,8 @@ extern "C" {
     SENSEL_ERROR     = -1,              // Call returned an error
   } SenselStatus;
 
-	/*
-	 * Name				: SenselScanMode
-	 * Description: Device scan reporting mode
+	/*!
+	 * @discussion Device scan reporting mode
 	 */
   typedef enum
   {
@@ -87,9 +84,8 @@ extern "C" {
     SCAN_MODE_ASYNC,
   } SenselScanMode;
 
-  /*
-   * Name       : SenselScanDetail
-   * Description: Describes the current state of a contact
+  /*!
+   * @discussion Describes the current state of a contact
    */
   typedef enum
   {
@@ -99,9 +95,8 @@ extern "C" {
     SCAN_DETAIL_UNKNOWN  = 3,
   } SenselScanDetail;
 
-  /*
-   * Name       : SenselContactState
-   * Description: Describes the current state of a contact
+  /*!
+   * @discussion Describes the current state of a contact
    */
   typedef enum
   {
@@ -111,9 +106,8 @@ extern "C" {
     CONTACT_END     = 3,                // Contact has ended
   } SenselContactState;
 
-  /*
-   * Name       : SenselSensorInfo
-   * Description: Structure containing sensor information
+  /*!
+   * @discussion Structure containing sensor information
    */
   typedef struct
   {
@@ -124,9 +118,8 @@ extern "C" {
     float           height;             // Height of the sensor in millimeters
   } SenselSensorInfo;
 
-  /*
-   * Name       : SenselFirmwareInfo
-   * Description: Structure containing firmware information
+  /*!
+   * @discussion Structure containing firmware information
    */
   typedef struct
   {
@@ -140,9 +133,8 @@ extern "C" {
   } SenselFirmwareInfo;
 
 
-  /*
-   * Name       : SenselContact
-   * Description: Structure containing all information related to a detected contact
+  /*!
+   * @discussion Structure containing all information related to a detected contact
    *              The content_bit_mask reflects which data is valid
    */
 	typedef struct
@@ -178,9 +170,8 @@ extern "C" {
     float                peak_force;         // Peak force in grams
   } SenselContact;
 
-  /*
-   * Name       : SenselAccelData
-   * Description: Accelerometer information
+  /*!
+   * @discussion Accelerometer information
    */
   typedef struct
   {
@@ -189,9 +180,8 @@ extern "C" {
     int z;                             // Z axis acceleration
   } SenselAccelData;
 
-  /*
-   * Name       : SenselFrameData
-   * Description: Container for one frame of data.
+  /*!
+   * @discussion Container for one frame of data.
    *              Available content of the frame needs to be checked by looking at the content_bit_mask
    */
   typedef struct
@@ -205,9 +195,8 @@ extern "C" {
     SenselAccelData *accel_data;       // Accelerometer data
   } SenselFrameData;
 
-  /*
-   * Name       : SenselDeviceID
-   * Description: Sensel identifier information
+  /*!
+   * @discussion Sensel identifier information
    */
   typedef struct
   {
@@ -216,9 +205,8 @@ extern "C" {
     unsigned char com_port[64];        // Com port associated with the sensor
   } SenselDeviceID;
 
-  /*
-   * Name       : SenselDeviceList
-   * Description: List of connected Sensel devices
+  /*!
+   * @discussion List of connected Sensel devices
    */
   typedef struct
   {
@@ -226,274 +214,228 @@ extern "C" {
     SenselDeviceID devices[SENSEL_MAX_DEVICES]; // Sensel device ID details
   } SenselDeviceList;
 
-  /*
-   * Function   : senselOpen
-   * Parameters : handle: Sensel device handle to be allocated
-   * Return     : SENSEL_OK on success or error
-   * Description: Opens the first available Sensel sensor
+  /*!
+   * @param      handle Sensel device handle to be allocated
+   * @return     SENSEL_OK on success or error
+   * @discussion Opens the first available Sensel sensor
    */
   SENSEL_API
   SenselStatus WINAPI senselOpen(SENSEL_HANDLE *handle);
 
-  /*
-   * Function   : senselGetDeviceList
-   * Parameters : list: Device list to be populated
-   * Return     : SENSEL_OK on success or error
-   * Description: Scans for all availale sensel devices and populates list accordingly
+  /*!
+   * @param      list Device list to be populated
+   * @return     SENSEL_OK on success or error
+   * @discussion Scans for all availale sensel devices and populates list accordingly
    */
   SENSEL_API
   SenselStatus WINAPI senselGetDeviceList(SenselDeviceList *list);
 
-  /*
-   * Function   : senselOpenDeviceByID
-   * Parameters : handle: Sensel device handle to be initialized
-   *              idx   : identifier of the device to open
-   * Return     : SENSEL_OK on success or error
-   * Description: Opens the devices associated to the given idx as returned by senselGetDeviceList.
+  /*!
+   * @param      handle Sensel device handle to be initialized
+   * @param      idx    identifier of the device to open
+   * @return     SENSEL_OK on success or error
+   * @discussion Opens the devices associated to the given idx as returned by senselGetDeviceList.
    *              senselGetDeviceList must be called prior to this call
    */
   SENSEL_API
   SenselStatus WINAPI senselOpenDeviceByID(SENSEL_HANDLE *handle, unsigned char idx);
 
-  /*
-   * Function   : senselOpenDeviceBySerialNum
-   * Parameters : handle    : Sensel device handle to be initialized
-   *              serial_num: serial_number of the device to open
-   * Return     : SENSEL_OK on success or error
-   * Description: Opens the devices associated to the given serial_num as returned by senselGetDeviceList.
+  /*!
+   * @param      handle     Sensel device handle to be initialized
+   * @param      serial_num serial_number of the device to open
+   * @return     SENSEL_OK on success or error
+   * @discussion Opens the devices associated to the given serial_num as returned by senselGetDeviceList.
    *              senselGetDeviceList must be called prior to this call
    */
   SENSEL_API
   SenselStatus WINAPI senselOpenDeviceBySerialNum(SENSEL_HANDLE *handle, unsigned char *serial_num);
 
-  /*
-   * Function   : senselOpenDeviceByComPort
-   * Parameters : handle  : Sensel device handle to be initialized
-   *              com_port: com_port path of the device to open
-   * Return     : SENSEL_OK on success or error
-   * Description: Opens the devices associated to the given com_port as returned by senselGetDeviceList.
+  /*!
+   * @param      handle   Sensel device handle to be initialized
+   * @param      com_port com_port path of the device to open
+   * @return     SENSEL_OK on success or error
+   * @discussion Opens the devices associated to the given com_port as returned by senselGetDeviceList.
    *              senselGetDeviceList must be called prior to this call
    */
   SENSEL_API
   SenselStatus WINAPI senselOpenDeviceByComPort(SENSEL_HANDLE *handle, unsigned char *com_port);
 
-  /*
-   * Function   : senselClose
-   * Parameters : handle: Sensel device to be closed
-   * Return     : SENSEL_OK on success or error
-   * Description: Closes the device associated with handle and frees all memory.
+  /*!
+   * @param      handle Sensel device to be closed
+   * @return     SENSEL_OK on success or error
+   * @discussion Closes the device associated with handle and frees all memory.
    */
   SENSEL_API
   SenselStatus WINAPI senselClose(SENSEL_HANDLE handle);
 
-  /*
-   * Function   : senselSoftReset
-   * Parameters : handle: Sensel device to reset
-   * Return     : SENSEL_OK on success or error
-   * Description: Executes a soft reset the device referenced by handle.
+  /*!
+   * @param      handle Sensel device to reset
+   * @return     SENSEL_OK on success or error
+   * @discussion Executes a soft reset the device referenced by handle.
    *              All registers are reset to their initial state
    */
   SENSEL_API
   SenselStatus WINAPI senselSoftReset(SENSEL_HANDLE handle);
 
-  /*
-   * Function   : senselGetSensorInfo
-   * Parameters : handle: Sensel device handle to information about
-   *              info  : Pointer to a structure to populate
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieves the sensor information
+  /*!
+   * @param      handle Sensel device handle to information about
+   * @param      info   Pointer to a structure to populate
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieves the sensor information
    */
   SENSEL_API
   SenselStatus WINAPI senselGetSensorInfo(SENSEL_HANDLE handle, SenselSensorInfo *info);
 
-  /*
-   * Function   : senselAllocateFrameData
-   * Parameters : handle: Sensel device handle for which to create a FrameData structure for
-   *              data  : Pointer to FrameData to allocate.
-   * Return     : SENSEL_OK on success or error
-   * Description: Allocates a FrameData and initializes all buffers according to device capabilities.
+  /*!
+   * @param      handle Sensel device handle for which to create a FrameData structure for
+   * @param      data   Pointer to FrameData to allocate.
+   * @return     SENSEL_OK on success or error
+   * @discussion Allocates a FrameData and initializes all buffers according to device capabilities.
    */
   SENSEL_API
   SenselStatus WINAPI senselAllocateFrameData(SENSEL_HANDLE handle, SenselFrameData **data);
 
-  /*
-   * Function   : senselFreeFrameData
-   * Parameters : handle: Sensel device handle
-   *              data  : FrameData to free.
-   * Return     : SENSEL_OK on success or error
-   * Description: Frees all memory allocated to FrameData including the FrameData itself.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      data   FrameData to free.
+   * @return     SENSEL_OK on success or error
+   * @discussion Frees all memory allocated to FrameData including the FrameData itself.
    */
   SENSEL_API
   SenselStatus WINAPI senselFreeFrameData(SENSEL_HANDLE handle, SenselFrameData *data);
 
-  /*
-   * Function   : senselSetScanDetail
-   * Parameters : handle: Sensel device handle
-   *              detail: Scan detail level
-   * Return     : SENSEL_OK on success or error
-   * Description: Set the level of scanning detail returned by the device. This setting trades precision for performance.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      detail Scan detail level
+   * @return     SENSEL_OK on success or error
+   * @discussion Set the level of scanning detail returned by the device. This setting trades precision for performance.
    */
   SENSEL_API
   SenselStatus WINAPI senselSetScanDetail(SENSEL_HANDLE handle, SenselScanDetail detail);
 
-  /*
-   * Function   : senselGetScanDetail
-   * Parameters : handle: Sensel device handle
-   *              detail: Pointer to scan detail level to retrieve
-   * Return     : SENSEL_OK on success or error
-   * Description: Get the current scanning level setting
+  /*!
+   * @param      handle Sensel device handle
+   * @param      detail Pointer to scan detail level to retrieve
+   * @return     SENSEL_OK on success or error
+   * @discussion Get the current scanning level setting
    */
   SENSEL_API
   SenselStatus WINAPI senselGetScanDetail(SENSEL_HANDLE handle, SenselScanDetail *detail);
 
-  /*
-   * Function   : senselGetSupportedFrameContent
-   * Parameters : handle  : Sensel device handle
-   *              content : Pointer to frame content supported by device
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieve the frame content that the device supports
+  /*!
+   * @param      handle   Sensel device handle
+   * @param      content  Pointer to frame content supported by device
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieve the frame content that the device supports
    */
   SENSEL_API
   SenselStatus WINAPI senselGetSupportedFrameContent(SENSEL_HANDLE handle, unsigned char *content);
 
-  /*
-   * Function   : senselSetFrameContent
-   * Parameters : handle  : Sensel device handle
-   *              content : Frame content mask
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the information returned by the sensor.
+  /*!
+   * @param      handle   Sensel device handle
+   * @param      content  Frame content mask
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the information returned by the sensor.
    *              content can be any combination of FRAME_CONTENT_*_MASK.
    *              FrameData returned in subsequent GetFrame calls will reflect this setting.
    */
   SENSEL_API
   SenselStatus WINAPI senselSetFrameContent(SENSEL_HANDLE handle, unsigned char content);
 
-  /*
-   * Function   : senselGetFrameContent
-   * Parameters : handle  : Sensel device handle
-   *              content : Pointer to content level to retrieve
-   * Return     : SENSEL_OK on success or error
-   * Description: Get the current frame content mask from the device
+  /*!
+   * @param      handle   Sensel device handle
+   * @param      content  Pointer to content level to retrieve
+   * @return     SENSEL_OK on success or error
+   * @discussion Get the current frame content mask from the device
    */
   SENSEL_API
   SenselStatus WINAPI senselGetFrameContent(SENSEL_HANDLE handle, unsigned char *content);
 
-  /*
-   * Function   : senselStartScanning
-   * Parameters : handle: Sensel device handle
-   * Return     : SENSEL_OK on success or error
-   * Description: Start sensor scanning
+  /*!
+   * @param      handle Sensel device handle
+   * @return     SENSEL_OK on success or error
+   * @discussion Start sensor scanning
    */
   SENSEL_API
   SenselStatus WINAPI senselStartScanning(SENSEL_HANDLE handle);
 
-  /*
-   * Function   : senselStopScanning
-   * Parameters : handle: Sensel device handle
-   * Return     : SENSEL_OK on success or error
-   * Description: Stop sensor scanning
+  /*!
+   * @param      handle Sensel device handle
+   * @return     SENSEL_OK on success or error
+   * @discussion Stop sensor scanning
    */
   SENSEL_API
   SenselStatus WINAPI senselStopScanning(SENSEL_HANDLE handle);
 
-  /*
-   * Function   : senselReadSensor
-   * Parameters : handle: Sensel device handle
-   * Return     : SENSEL_OK on success or error
-   * Description: Reads out and stores all pending frames from the sensor
+  /*!
+   * @param      handle Sensel device handle
+   * @return     SENSEL_OK on success or error
+   * @discussion Reads out and stores all pending frames from the sensor
    */
   SENSEL_API
   SenselStatus WINAPI senselReadSensor(SENSEL_HANDLE handle);
 
-  /*
-   * Function   : senselGetNumAvailableFrames
-   * Parameters : handle          : Sensel device handle
-   *              num_avail_frames: Will contain the number of frames available to GetFrame
-   * Return     : SENSEL_OK on success or error
-   * Description: Returns in num_avail_frames the number of data frames available.
+  /*!
+   * @param      handle           Sensel device handle
+   * @param      num_avail_frames Will contain the number of frames available to GetFrame
+   * @return     SENSEL_OK on success or error
+   * @discussion Returns in num_avail_frames the number of data frames available.
    */
   SENSEL_API
   SenselStatus WINAPI senselGetNumAvailableFrames(SENSEL_HANDLE handle, unsigned int *num_avail_frames);
 
-  /*
-   * Function   : senselGetFrame
-   * Parameters : handle: Sensel device handle
-   *              data  : Pointer to pre-allocated FrameData to populate
-   * Return     : SENSEL_OK on success or error
-   * Description: Returns one frame of data in data.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      data   Pointer to pre-allocated FrameData to populate
+   * @return     SENSEL_OK on success or error
+   * @discussion Returns one frame of data in data.
    */
   SENSEL_API
   SenselStatus WINAPI senselGetFrame(SENSEL_HANDLE handle, SenselFrameData *data);
 
-  /*
-   * Function   : senselSetDynamicBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : Enable/Disable flag
-   * Return     : SENSEL_OK on success or error
-   * Description: Enables or disables dynamic baselining based on val. If dynamic baseline is
-   *              disabled, the baseline does not evolve over time.
-   */
-  SENSEL_API
-  SenselStatus WINAPI senselSetDynamicBaselineEnabled(SENSEL_HANDLE handle, unsigned char val);
-
-  /*
-   * Function   : senselGetDynamicBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to enable/disable flag
-   * Return     : SENSEL_OK on success or error
-   * Description: Returns state of dynamic baseline enabled flag
-   */
-  SENSEL_API
-  SenselStatus WINAPI senselGetDynamicBaselineEnabled(SENSEL_HANDLE handle, unsigned char *val);
-
-  /*
-   * Function   : senselGetNumAvailableLEDs
-   * Parameters : handle  : Sensel device handle
-   *              num_leds: Pointer to number of leds on device
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieve number of LEDs available on the device
+  /*!
+   * @param      handle   Sensel device handle
+   * @param      num_leds Pointer to number of leds on device
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieve number of LEDs available on the device
    */
   SENSEL_API
   SenselStatus WINAPI senselGetNumAvailableLEDs(SENSEL_HANDLE handle, unsigned char *num_leds);
 
-  /*
-   * Function   : senselGetMaxLEDBrightness
-   * Parameters : handle        : Sensel device handle
-   *              max_brightness: Pointer to maximum per LED brightness
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieve the maximum brightness value an LED can be set to
+  /*!
+   * @param      handle         Sensel device handle
+   * @param      max_brightness Pointer to maximum per LED brightness
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieve the maximum brightness value an LED can be set to
    */
   SENSEL_API
   SenselStatus WINAPI senselGetMaxLEDBrightness(SENSEL_HANDLE handle, unsigned short *max_brightness);
 
-  /*
-   * Function   : senselSetLEDBrightness
-   * Parameters : handle        : Sensel device handle
-   *              led_id        : Index of the LED to update
-   *              brightness    : Brightness setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Update the brightness of one LED
+  /*!
+   * @param      handle         Sensel device handle
+   * @param      led_id         Index of the LED to update
+   * @param      brightness     Brightness setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Update the brightness of one LED
    */
   SENSEL_API
   SenselStatus WINAPI senselSetLEDBrightness(SENSEL_HANDLE handle, unsigned char led_id, unsigned short brightness);
 
-  /*
-   * Function   : senselGetLEDBrightness
-   * Parameters : handle        : Sensel device handle
-   *              led_id        : Index of the LED to update
-   *              brightness    : Pointer to brightness setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieve the current brightness of an LED
+  /*!
+   * @param      handle         Sensel device handle
+   * @param      led_id         Index of the LED to update
+   * @param      brightness     Pointer to brightness setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieve the current brightness of an LED
    */
   SENSEL_API
   SenselStatus WINAPI senselGetLEDBrightness(SENSEL_HANDLE handle, unsigned char led_id, unsigned short *brightness);
 
-  /*
-   * Function   : senselGetPowerButtonPressed
-   * Parameters : handle  : Sensel device handle
-   *              pressed : Pointer to hold state of power button
-   * Return     : SENSEL_OK on success or error
-   * Description: Pressed will be 1 if button was pressed or 0 otherwize
+  /*!
+   * @param      handle   Sensel device handle
+   * @param      pressed  Pointer to hold state of power button
+   * @return     SENSEL_OK on success or error
+   * @discussion Pressed will be 1 if button was pressed or 0 otherwize
    */
   SENSEL_API
   SenselStatus WINAPI senselGetPowerButtonPressed(SENSEL_HANDLE handle, unsigned char *pressed);
@@ -503,225 +445,186 @@ extern "C" {
    * The following calls are advanced and can break functionality if not used properly.
 	 */
 
-  /*
-   * Function   : senselGetFirmwareInfo
-   * Parameters : handle : Sensel device handle
-   *              fw_info: Pointer to SenselFirmwareInfo structure to populate
-   * Return     : SENSEL_OK on success or error
-   * Description: Retrieve firmware device information
+  /*!
+   * @param      handle  Sensel device handle
+   * @param      fw_info Pointer to SenselFirmwareInfo structure to populate
+   * @return     SENSEL_OK on success or error
+   * @discussion Retrieve firmware device information
    */
   SENSEL_API
   SenselStatus WINAPI senselGetFirmwareInfo(SENSEL_HANDLE handle, SenselFirmwareInfo* fw_info);
 
-  /*
-   * Function   : senselSetContactsEnableBlobMerge
-   * Parameters : handle: Sensel device handle
-   *              val   : 0 to disable - 1 to enable
-   * Return     : SENSEL_OK on success or error
-   * Description: Set contact blob merging setting
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    0 to disable - 1 to enable
+   * @return     SENSEL_OK on success or error
+   * @discussion Set contact blob merging setting
    */
   SENSEL_API
   SenselStatus WINAPI senselSetContactsEnableBlobMerge(SENSEL_HANDLE handle, unsigned char val);
 
-  /*
-   * Function   : senselGetContactsEnableBlobMerge
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to contain current setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Get contact blob merging setting
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Pointer to contain current setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Get contact blob merging setting
    */
   SENSEL_API
   SenselStatus WINAPI senselGetContactsEnableBlobMerge(SENSEL_HANDLE handle, unsigned char *val);
 
-  /*
-   * Function   : senselSetContactsMinForce
-   * Parameters : handle: Sensel device handle
-   *              val   : Force value
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the minimum force a contact needs to have to be reported
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Force value
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the minimum force a contact needs to have to be reported
    */
   SENSEL_API
   SenselStatus WINAPI senselSetContactsMinForce(SENSEL_HANDLE handle, unsigned short val);
 
-  /*
-   * Function   : senselGetContactsMinForce
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to contain current setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Gets the minimum force a contact needs to have to be reported
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Pointer to contain current setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Gets the minimum force a contact needs to have to be reported
    */
   SENSEL_API
   SenselStatus WINAPI senselGetContactsMinForce(SENSEL_HANDLE handle, unsigned short *val);
 
-  /*
-   * Function   : senselSetBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : true: Enabled - false: Disabled
-   * Return     : SENSEL_OK on success or error
-   * Description: Toggles Baselining on or off
-   */
-  SENSEL_API
-  SenselStatus WINAPI senselSetBaselineEnabled(SENSEL_HANDLE handle, unsigned char val);
-
-  /*
-   * Function   : senselGetBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to contain current setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Retreives the current baselining setting
-   */
-  SENSEL_API
-  SenselStatus WINAPI senselGetBaselineEnabled(SENSEL_HANDLE handle, unsigned char *val);
-
-  /*
-   * Function   : senselSetDynamicBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : true: Enabled - false: Disabled
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets if the baseline is dynamic and evolves over time
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    true: Enabled - false: Disabled
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets if the baseline is dynamic and evolves over time
    */
   SENSEL_API
   SenselStatus WINAPI senselSetDynamicBaselineEnabled(SENSEL_HANDLE handle, unsigned char val);
 
-  /*
-   * Function   : senselGetDynamicBaselineEnabled
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to contain current setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Retreives the current dynamic baselining setting
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Pointer to contain current setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Retreives the current dynamic baselining setting
    */
   SENSEL_API
   SenselStatus WINAPI senselGetDynamicBaselineEnabled(SENSEL_HANDLE handle, unsigned char *val);
 
-  /*
-   * Function   : senselSetBufferControl
-   * Parameters : handle: Sensel device handle
-   *              num   : Number of buffers
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the number of frame buffers the device should store internaly.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      num    Number of buffers
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the number of frame buffers the device should store internaly.
    */
   SENSEL_API
   SenselStatus WINAPI senselSetBufferControl(SENSEL_HANDLE handle, unsigned char num);
 
-  /*
-   * Function   : senselGetBufferControl
-   * Parameters : handle: Sensel device handle
-   *              num   : Pointer to contain current setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Gets the number of frame buffers the device should store internaly.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      num    Pointer to contain current setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Gets the number of frame buffers the device should store internaly.
    */
   SENSEL_API
   SenselStatus WINAPI senselGetBufferControl(SENSEL_HANDLE handle, unsigned char *num);
 
-  /*
-   * Function   : senselSetScanMode
-   * Parameters : handle: Sensel device handle
-   *              mode  : Scan mode setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the current scan mode.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      mode   Scan mode setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the current scan mode.
    */
   SENSEL_API
   SenselStatus WINAPI senselSetScanMode(SENSEL_HANDLE handle, SenselScanMode mode);
 
-  /*
-   * Function   : senselGetScanMode
-   * Parameters : handle: Sensel device handle
-   *              mode  : Pointer to retrieve Scan mode setting
-   * Return     : SENSEL_OK on success or error
-   * Description: Gets the current scan mode.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      mode   Pointer to retrieve Scan mode setting
+   * @return     SENSEL_OK on success or error
+   * @discussion Gets the current scan mode.
    */
   SENSEL_API
   SenselStatus WINAPI senselGetScanMode(SENSEL_HANDLE handle, SenselScanMode *mode);
 
-  /*
-   * Function   : senselSetMaxFrameRate
-   * Parameters : handle: Sensel device handle
-   *              val   : Max framerate
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the maximum framerate at which the device should report
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Max framerate
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the maximum framerate at which the device should report
    */
   SENSEL_API
   SenselStatus WINAPI senselSetMaxFrameRate(SENSEL_HANDLE handle, unsigned short val);
 
-  /*
-   * Function   : senselGetMaxFrameRate
-   * Parameters : handle: Sensel device handle
-   *              val   : Pointer to retrieve current max framerate
-   * Return     : SENSEL_OK on success or error
-   * Description: Gets the maximum framerate at which the device should report
+  /*!
+   * @param      handle Sensel device handle
+   * @param      val    Pointer to retrieve current max framerate
+   * @return     SENSEL_OK on success or error
+   * @discussion Gets the maximum framerate at which the device should report
    */
   SENSEL_API
   SenselStatus WINAPI senselGetMaxFrameRate(SENSEL_HANDLE handle, unsigned short *val);
 
-  /*
-   * Function   : senselSetContactMask
-   * Parameters : handle: Sensel device handle
-   *              mask  : Contact information mask
-   * Return     : SENSEL_OK on success or error
-   * Description: Sets the contact information reported by the sensor
+  /*!
+   * @param      handle Sensel device handle
+   * @param      mask   Contact information mask
+   * @return     SENSEL_OK on success or error
+   * @discussion Sets the contact information reported by the sensor
    *              mask can be any combination of CONTACT_MASK_*
    *              Contacts returned in subsequent GetFrame calls will reflect this setting.
    */
   SENSEL_API
   SenselStatus WINAPI senselSetContactsMask(SENSEL_HANDLE handle, unsigned char mask);
 
-  /*
-   * Function   : senselGetContactMask
-   * Parameters : handle: Sensel device handle
-   *              mask  : Pointer to retrieve current max framerate
-   * Return     : SENSEL_OK on success or error
-   * Description: Gets the current contact mask setting for the device
+  /*!
+   * @param      handle Sensel device handle
+   * @param      mask   Pointer to retrieve current max framerate
+   * @return     SENSEL_OK on success or error
+   * @discussion Gets the current contact mask setting for the device
    */
   SENSEL_API
   SenselStatus WINAPI senselGetContactsMask(SENSEL_HANDLE handle, unsigned char *mask);
 
-  /*
-   * Function   : senselReadReg
-   * Parameters : handle: Sensel device handle
-   *              reg   : Register to read
-   *              size  : Size of the register
-   *              buf   : Buffer to store the result
-   * Return     : SENSEL_OK on success or error
-   * Description: Reads size bytes from register reg and stores the value in buf.
+  /*!
+   * @param      handle Sensel device handle
+   * @param      reg    Register to read
+   * @param      size   Size of the register
+   * @param      buf    Buffer to store the result
+   * @return     SENSEL_OK on success or error
+   * @discussion Reads size bytes from register reg and stores the value in buf.
    */
   SENSEL_API
   SenselStatus WINAPI senselReadReg(SENSEL_HANDLE handle, unsigned char reg, unsigned char size, unsigned char *buf);
 
-  /*
-   * Function   : senselWriteReg
-   * Parameters : handle: Sensel device handle
-   *              reg   : Register to write
-   *              size  : Size of the register
-   *              buf   : Buffer containing the data to write
-   * Return     : SENSEL_OK on success or error
-   * Description: Writes size bytes from buf into register reg
+  /*!
+   * @param      handle Sensel device handle
+   * @param      reg    Register to write
+   * @param      size   Size of the register
+   * @param      buf    Buffer containing the data to write
+   * @return     SENSEL_OK on success or error
+   * @discussion Writes size bytes from buf into register reg
    */
   SENSEL_API
   SenselStatus WINAPI senselWriteReg(SENSEL_HANDLE handle, unsigned char reg, unsigned char size, unsigned char *buf);
 
-  /*
-   * Function   : senselReadRegVS
-   * Parameters : handle   : Sensel device handle
-   *              reg      : Register to write
-   *              buf_size : Size of the "buf" buffer
-   *              buf      : Buffer to store the result
-   *              read_size: Variable to store the number of bytes read from register
-   * Return     : SENSEL_OK on success or error
-   * Description: Reads up to buf_size bytes from register reg and stores it in buf. On success, read_size will
+  /*!
+   * @param      handle    Sensel device handle
+   * @param      reg       Register to write
+   * @param      buf_size  Size of the "buf" buffer
+   * @param      buf       Buffer to store the result
+   * @param      read_size Variable to store the number of bytes read from register
+   * @return     SENSEL_OK on success or error
+   * @discussion Reads up to buf_size bytes from register reg and stores it in buf. On success, read_size will
    *              contain the number of bytes read from the register.
    */
   SENSEL_API
   SenselStatus WINAPI senselReadRegVS(SENSEL_HANDLE handle, unsigned char reg, unsigned int buf_size, unsigned char *buf, unsigned int *read_size);
 
-  /*
-   * Function   : senselWriteRegVS
-   * Parameters : handle    : Sensel device handle
-   *              reg       : Register to write
-   *              size      : Size of data to write from buf
-   *              buf       : Buffer holding data to write
-   *              write_size: Variable to store the number of bytes actually written
-   * Return     : SENSEL_OK on success or error
-   * Description: Write up to size bytes from buf to register reg. On success, write_size will
+  /*!
+   * @param      handle     Sensel device handle
+   * @param      reg        Register to write
+   * @param      size       Size of data to write from buf
+   * @param      buf        Buffer holding data to write
+   * @param      write_size Variable to store the number of bytes actually written
+   * @return     SENSEL_OK on success or error
+   * @discussion Write up to size bytes from buf to register reg. On success, write_size will
    *              contain the number of bytes written to the register.
    */
   SENSEL_API

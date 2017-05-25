@@ -217,7 +217,10 @@ unsigned char senselSerialOpen(SenselSerialHandle *data, char* com_port)
     strcpy(file_name, SENSEL_SERIAL_DIR);
 
     if(strstr(dir->d_name, "morph") ||
-       strstr(dir->d_name, "ttyACM"))
+       strstr(dir->d_name, "squirt") ||
+       strstr(dir->d_name, "ttyACM") ||
+       strstr(dir->d_name, "tty.usbmodem") ||
+       strstr(dir->d_name, "cu.usbmodem"))
     {
       strcat(file_name, dir->d_name);
 
@@ -310,12 +313,13 @@ unsigned char senselSerialScan(SenselDeviceList *list)
   {
     strcpy(file_name, SENSEL_SERIAL_DIR);
 
-    if(strstr(dir->d_name, "ttyS") ||
-       strstr(dir->d_name, "ttyUSB") ||
+    if(strstr(dir->d_name, "morph")  ||
+       strstr(dir->d_name, "squirt") ||
+       strstr(dir->d_name, "ttyACM") ||
        strstr(dir->d_name, "tty.usbmodem") ||
-       strstr(dir->d_name, "cu.usbmodem") ||
-       strstr(dir->d_name, "ttyACM"))
+       strstr(dir->d_name, "cu.usbmodem"))
     {
+      printf("Found device: %s\n", dir->d_name);
       strcat(file_name, dir->d_name);
       found_sensor = senselSerialOpen2(&serial, file_name);
       if (found_sensor)

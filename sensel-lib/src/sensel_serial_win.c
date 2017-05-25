@@ -32,6 +32,7 @@
 #include "sensel_serial.h"
 #include "sensel_register.h"
 #include "sensel_register_map.h"
+#include "sensel_device_vidpid.h"
 
 #define SENSEL_COM_PORT_PREFIX "\\\\.\\"
 
@@ -53,13 +54,13 @@ unsigned char senselSerialOpen2(SenselSerialHandle *data, char* com_port)
   strcat(full_port_name, com_port);
 
   data->serial_handle = CreateFileA(full_port_name,
-      GENERIC_READ | GENERIC_WRITE,
-      0,    // must be opened with exclusive-access
-      NULL, // no security attributes
-      OPEN_EXISTING, // must use OPEN_EXISTING
-      FILE_ATTRIBUTE_NORMAL,    // not overlapped I/O
-      NULL  // hTemplate must be NULL for comm devices
-      );
+                                    GENERIC_READ | GENERIC_WRITE,
+                                    0,                            // must be opened with exclusive-access
+                                    NULL,                         // no security attributes
+                                    OPEN_EXISTING,                // must use OPEN_EXISTING
+                                    FILE_ATTRIBUTE_NORMAL,        // not overlapped I/O
+                                    NULL                          // hTemplate must be NULL for comm devices
+                                    );
 
   if (data->serial_handle == INVALID_HANDLE_VALUE)
   {
@@ -82,7 +83,7 @@ unsigned char senselSerialOpen2(SenselSerialHandle *data, char* com_port)
   // Fill in DCB: 115,200 bps, 8 data bits, no parity, and 1 stop bit.
   dcb.BaudRate  = CBR_115200;    // CBR_9600;  // set the baud rate
   dcb.ByteSize  = 8;             // data size, xmit, and rcv
-  dcb.Parity    = NOPARITY;        // no parity bit
+  dcb.Parity    = NOPARITY;      // no parity bit
   dcb.StopBits  = ONESTOPBIT;    // one stop bit
 
   // The following settings are probably not necessary
@@ -148,6 +149,7 @@ unsigned char senselSerialOpen2(SenselSerialHandle *data, char* com_port)
 static unsigned char ComPortNames(SenselSerialHandle *data)
 {
   unsigned        index;
+  unsigned        devtypeidx;
   HDEVINFO        hDevInfo;
   SP_DEVINFO_DATA DeviceInfoData;
   TCHAR           HardwareID[1024];
@@ -162,22 +164,27 @@ static unsigned char ComPortNames(SenselSerialHandle *data)
 
     SetupDiGetDeviceRegistryProperty(hDevInfo, &DeviceInfoData, SPDRP_HARDWAREID, NULL, (BYTE*)HardwareID, sizeof(HardwareID), NULL);
 
-    if (_tcsstr(HardwareID, _T("VID_2C2F&PID_0003"))) {
-      HKEY hKeyDevice = SetupDiOpenDevRegKey(hDevInfo, &DeviceInfoData, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
+    for (devtypeidx = 0; devtypeidx < NUM_SUPPORTED_DEVS; devtypeidx++)
+    {
+      if (_tcsstr(HardwareID, _T(supported_devices[devtypeidx].vidpidstr)))
+      {
+        HKEY  hKeyDevice = SetupDiOpenDevRegKey(hDevInfo, &DeviceInfoData, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
+        char  acValue[256];
+        DWORD dwSize = sizeof(acValue);
 
-      char acValue[256];
-      DWORD dwSize = sizeof(acValue);
-      RegQueryValueExW(hKeyDevice, L"PortName", NULL, NULL, (LPBYTE)acValue, &dwSize);
-      RegCloseKey(hKeyDevice);
+        printf("Found device: %s\n", supported_devices[devtypeidx].name);
+        RegQueryValueExW(hKeyDevice, L"PortName", NULL, NULL, (LPBYTE)acValue, &dwSize);
+        RegCloseKey(hKeyDevice);
 
-      if (dwSize < 255) {
-        char com[128];
-        for (unsigned int i = 0; i < dwSize + 1; i++) {
-          com[i] = acValue[2 * i];
-        }
-        if (senselSerialOpen2(data, com))
-        {
-          return true;
+        if (dwSize < 255) {
+          char com[128];
+          for (unsigned int i = 0; i < dwSize + 1; i++) {
+            com[i] = acValue[2 * i];
+          }
+          if (senselSerialOpen2(data, com))
+          {
+            return true;
+          }
         }
       }
     }
@@ -187,7 +194,8 @@ static unsigned char ComPortNames(SenselSerialHandle *data)
 
 unsigned char senselSerialScan(SenselDeviceList *list)
 {
-  unsigned            index;
+  unsigned int        index;
+  unsigned int        devtypeidx;
   HDEVINFO            hDevInfo;
   SP_DEVINFO_DATA     DeviceInfoData;
   TCHAR               HardwareID[1024];
@@ -210,46 +218,50 @@ unsigned char senselSerialScan(SenselDeviceList *list)
 
     SetupDiGetDeviceRegistryProperty(hDevInfo, &DeviceInfoData, SPDRP_HARDWAREID, NULL, (BYTE*)HardwareID, sizeof(HardwareID), NULL);
 
-    if (_tcsstr(HardwareID, _T("VID_2C2F&PID_0003")))
+    for (devtypeidx = 0; devtypeidx < NUM_SUPPORTED_DEVS; devtypeidx++)
     {
-      HKEY hKeyDevice = SetupDiOpenDevRegKey(hDevInfo, &DeviceInfoData, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
-
-      char acValue[256];
-      DWORD dwSize = sizeof(acValue);
-      RegQueryValueExW(hKeyDevice, L"PortName", NULL, NULL, (LPBYTE)acValue, &dwSize);
-      RegCloseKey(hKeyDevice);
-
-      if (dwSize < 255)
+      if (_tcsstr(HardwareID, _T(supported_devices[devtypeidx].vidpidstr)))
       {
-        char com[128];
-        for (unsigned int i = 0; i < dwSize + 1; i++) {
-          com[i] = acValue[2 * i];
-        }
-        
-        found_sensor = senselSerialOpen2(&serial, com);
-        if (found_sensor)
+        HKEY hKeyDevice = SetupDiOpenDevRegKey(hDevInfo, &DeviceInfoData, DICS_FLAG_GLOBAL, 0, DIREG_DEV, KEY_READ);
+
+        char  acValue[256];
+        DWORD dwSize = sizeof(acValue);
+
+        RegQueryValueExW(hKeyDevice, L"PortName", NULL, NULL, (LPBYTE)acValue, &dwSize);
+        RegCloseKey(hKeyDevice);
+
+        if (dwSize < 255)
         {
-          SenselDeviceID *devid = &devlist.devices[num_devices];
-          unsigned int num_chars;
+          char com[128];
+          for (unsigned int i = 0; i < dwSize + 1; i++) {
+            com[i] = acValue[2 * i];
+          }
 
-          status = _senselReadRegVS(NULL, &serial, SENSEL_REG_DEVICE_SERIAL_NUMBER, sizeof(devid->serial_num),
-              devid->serial_num, &num_chars);
-          if (status != SENSEL_OK)
-            continue;
+          found_sensor = senselSerialOpen2(&serial, com);
+          if (found_sensor)
+          {
+            SenselDeviceID *devid = &devlist.devices[num_devices];
+            unsigned int num_chars;
 
-          // TODO: This is an issue in the firmware code where although the firmware reports a 16 byte long serial, only 13
-          //       of them are actually valid. As a consequence, scan through the string and replace 0xFF with 0.
-          for (unsigned int i = 0; i < num_chars; i++)
-            devid->serial_num[i] = (devid->serial_num[i] == 0xFF) ? 0 : devid->serial_num[i];
+            status = _senselReadRegVS(NULL, &serial, SENSEL_REG_DEVICE_SERIAL_NUMBER, sizeof(devid->serial_num),
+                devid->serial_num, &num_chars);
+            if (status != SENSEL_OK)
+              continue;
 
-          devid->idx = num_devices;
-          devid->serial_num[num_chars] = 0;
-          strncpy((char*)devid->com_port, com, sizeof(devid->com_port));
-          devlist.num_devices = ++num_devices;
+            // TODO: This is an issue in the firmware code where although the firmware reports a 16 byte long serial, only 13
+            //       of them are actually valid. As a consequence, scan through the string and replace 0xFF with 0.
+            for (unsigned int i = 0; i < num_chars; i++)
+              devid->serial_num[i] = (devid->serial_num[i] == 0xFF) ? 0 : devid->serial_num[i];
+
+            devid->idx = num_devices;
+            devid->serial_num[num_chars] = 0;
+            strncpy((char*)devid->com_port, com, sizeof(devid->com_port));
+            devlist.num_devices = ++num_devices;
+          }
+          senselSerialClose(&serial);
+          if (num_devices == SENSEL_MAX_DEVICES)
+            break;
         }
-        senselSerialClose(&serial);
-        if (num_devices == SENSEL_MAX_DEVICES)
-          break;
       }
     }
   }
