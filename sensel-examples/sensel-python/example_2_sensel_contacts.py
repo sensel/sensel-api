@@ -22,6 +22,8 @@
 # DEALINGS IN THE SOFTWARE.
 ##########################################################################
 
+import sys
+sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
 import sensel
 import binascii
 
@@ -46,10 +48,15 @@ def scanFrames(frame, info):
         printFrame(frame,info)
 
 def printFrame(frame, info):
-    print "\nNum Contacts: ", frame.n_contacts
-    for n in range(frame.n_contacts):
-        c = frame.contacts[n]
-        print "Contact ID: ", c.id
+    if frame.n_contacts > 0:
+        print "\nNum Contacts: ", frame.n_contacts
+        for n in range(frame.n_contacts):
+            c = frame.contacts[n]
+            print "Contact ID: ", c.id
+            if c.state == sensel.CONTACT_START:
+                sensel.setLEDBrightness(handle, c.id, 100)
+            elif c.state == sensel.CONTACT_END:
+                sensel.setLEDBrightness(handle, c.id, 0)
 
 def closeSensel(frame):
     error = sensel.freeFrameData(handle, frame)

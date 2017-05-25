@@ -27,51 +27,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sensel;
 
-namespace Sensel
+namespace SenselExamples
 {
-    class SenselTest
+    class SenselForces
     {
-
         static void Main(string[] args)
         {
-            IntPtr handle = new IntPtr(0);
-            SenselFrame frame = new SenselFrame();
-            SenselDeviceList list = new SenselDeviceList();
-            SenselSensorInfo sensor_info = new SenselSensorInfo();
-            float total_force = 0;
-            list.num_devices = 0;
-            Sensel.senselGetDeviceList(ref list);
+            SenselDeviceList list = SenselDevice.GetDeviceList();
             Console.WriteLine("Num Devices: " + list.num_devices);
             if (list.num_devices != 0)
             {
-                Sensel.senselOpenDeviceByID(ref handle, list.devices[0].idx);
-                Sensel.senselSetFrameContent(handle, 1);
-                Sensel.senselAllocateFrameData(handle, frame);
-                Sensel.senselStartScanning(handle);
-            }
-            if (handle.ToInt64() != 0)
-            {
-                Sensel.senselGetSensorInfo(handle, ref sensor_info);
+                SenselDevice sensel_device = new SenselDevice();
+                sensel_device.OpenDeviceByID(list.devices[0].idx);
+                sensel_device.SetFrameContent(SenselDevice.FRAME_CONTENT_PRESSURE_MASK);
+                sensel_device.StartScanning();
+                SenselSensorInfo sensor_info = sensel_device.GetSensorInfo();
                 for (int c = 0; c < 500; c++)
                 {
-                    Int32 num_frames = 0;
-                    Sensel.senselReadSensor(handle);
-                    Sensel.senselGetNumAvailableFrames(handle, ref num_frames);
-                    for (int f = 0; f < num_frames; f++)
+                    sensel_device.ReadSensor();
+                    int numFrames = sensel_device.GetNumAvailableFrames();
+                    for (int f = 0; f < numFrames; f++)
                     {
-                        Sensel.senselGetFrame(handle, frame);
-                        total_force = 0;
-                        for(int i =0; i < sensor_info.num_cols*sensor_info.num_rows; i++)
+                        SenselFrame frame = sensel_device.GetFrame();
+                        float total_force = 0;
+                        for(int i =0; i < sensor_info.num_cols* sensor_info.num_rows; i++)
                         {
                             total_force = total_force + frame.force_array[i];
                         }
-                        Console.WriteLine("Total Force: " +total_force);
+                        Console.WriteLine("Total Force: " + total_force);
                     }
                 }
-
-                Sensel.senselStopScanning(handle);
-                Sensel.senselClose(handle);
+                sensel_device.StopScanning();
+                sensel_device.Close();
             }
         }
     }

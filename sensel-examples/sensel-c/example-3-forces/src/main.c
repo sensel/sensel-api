@@ -63,7 +63,8 @@ int main(int argc, char **argv)
 	senselAllocateFrameData(handle, &frame);
 	//Start scanning the Sensel device
 	senselStartScanning(handle);
-	for (int c = 0; c < TEST_SCAN_NUM_LOOPS; c++)
+	
+	for (int n = 0; n < TEST_SCAN_NUM_LOOPS; n++)
 	{
 		unsigned int num_frames = 0;
 		//Read all available data from the Sensel device

@@ -4,12 +4,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloSensel", "example-1-hello-sensel\HelloSensel.csproj", "{01BFC880-051B-4EBE-B0C4-F4FB4E226790}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5ECA380-4318-44C1-B6AB-6D38A2823839} = {B5ECA380-4318-44C1-B6AB-6D38A2823839}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenselContacts", "example-2-contacts\SenselContacts.csproj", "{B0BF7803-0420-4CE2-BC9B-6AA14821C928}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5ECA380-4318-44C1-B6AB-6D38A2823839} = {B5ECA380-4318-44C1-B6AB-6D38A2823839}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenselForces", "example-3-forces\SenselForces.csproj", "{C9E0FCA6-0195-4FEE-A33C-542B3C497FEE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B5ECA380-4318-44C1-B6AB-6D38A2823839} = {B5ECA380-4318-44C1-B6AB-6D38A2823839}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenselWrapperCS", "sensel-wrapper-cs\SenselWrapperCS.csproj", "{B5ECA380-4318-44C1-B6AB-6D38A2823839}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SenselLibCS", "..\..\sensel-lib-wrappers\sensel-lib-cs\SenselLibCS.csproj", "{B5ECA380-4318-44C1-B6AB-6D38A2823839}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

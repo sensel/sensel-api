@@ -22,6 +22,8 @@
 # DEALINGS IN THE SOFTWARE.
 ##########################################################################
 
+import sys
+sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
 import sensel
 import binascii
 

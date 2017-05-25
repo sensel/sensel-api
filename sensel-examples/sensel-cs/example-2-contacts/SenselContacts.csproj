@@ -90,9 +90,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\sensel-wrapper-cs\SenselWrapperCS.csproj">
+    <ProjectReference Include="..\..\..\sensel-lib-wrappers\sensel-lib-cs\SenselLibCS.csproj">
       <Project>{b5eca380-4318-44c1-b6ab-6d38a2823839}</Project>
-      <Name>SenselWrapperCS</Name>
+      <Name>SenselLibCS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

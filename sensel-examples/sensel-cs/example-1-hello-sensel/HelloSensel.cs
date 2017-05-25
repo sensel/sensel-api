@@ -28,33 +28,29 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sensel;
 
-namespace Sensel
+namespace SenselExamples
 {
-    class SenselTest
+    class HelloSensel
     {
-
         static void Main(string[] args)
         {
-            IntPtr handle = new IntPtr(0);
-            SenselFrame frame = new SenselFrame();
-            SenselDeviceList list = new SenselDeviceList();
-            SenselSensorInfo sensor_info = new SenselSensorInfo();
-            list.num_devices = 0;
-            Sensel.senselGetDeviceList(ref list);
+            SenselDeviceList list = SenselDevice.GetDeviceList();
             Console.WriteLine("Num Devices: " + list.num_devices);
             if (list.num_devices != 0)
             {
-                Sensel.senselOpenDeviceByID(ref handle, list.devices[0].idx);
-            }
-            if (handle.ToInt64() != 0)
-            {
-                Sensel.senselGetSensorInfo(handle, ref sensor_info);
+                SenselDevice sensel_device = new SenselDevice();
+                sensel_device.OpenDeviceByID(list.devices[0].idx);
+                SenselSensorInfo sensor_info = sensel_device.GetSensorInfo();
+                SenselFirmwareInfo fw_info = sensel_device.GetFirmwareInfo();
                 Console.WriteLine("Sensel Device: " + System.Text.Encoding.Default.GetString(list.devices[0].serial_num));
+                Console.WriteLine("Firmware Version: " + fw_info.fw_version_major + "." + fw_info.fw_version_minor + "." + fw_info.fw_version_build);
                 Console.WriteLine("Width: " + sensor_info.width+"mm");
                 Console.WriteLine("Height: " + sensor_info.height + "mm");
                 Console.WriteLine("Cols: " + sensor_info.num_cols);
                 Console.WriteLine("Rows: " + sensor_info.num_rows);
+                sensel_device.Close();
             }
             Thread.Sleep(4000);
         }
