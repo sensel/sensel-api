@@ -10,4 +10,7 @@
    <FileRef
       location = "group:example-3-forces/SenselForces.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:example-4-multi/SenselMulti.xcodeproj">
+   </FileRef>
 </Workspace>
