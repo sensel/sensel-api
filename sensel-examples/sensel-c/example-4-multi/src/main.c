@@ -64,8 +64,6 @@ int main(int argc, char **argv)
 		senselStartScanning(handle[i]);
 	}
 
-	fprintf(stdout, "Press any key to exit...\n");
-
 	for (int n = 0; n < TEST_SCAN_NUM_LOOPS; n++)
 	{
 		unsigned int num_frames = 0;
