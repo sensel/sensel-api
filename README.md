@@ -37,25 +37,7 @@ senselliblinux.deb installs the libraries into /usr/lib and the headers into /us
 
 ## sensel-examples
 
-The sensel-examples directory includes wrappers and examples for C, C&#35;, and Python to demonstrate how to use the sensel-libraries for each language. Each example reads the contacts, forces and labels. All of the contacts are output into the console. The first 10 forces and lables (starting at the top left and moving right) are also output to the console. 
-
-### Sensel Example Languages
-
-#### sensel-c
-
-No wrapper is required for the sensel-c test. After installing the libraries, simply run the example in Visual Studio for Windows, xCode for Mac, and the Makefile for Linux.
-
-#### sensel-python
-
-After installing the libraries, the Python example can be run using 'python sensel_test.py'. 
-
-The Python wrapper can be found in sensel.py and should detect your operating system and whether it is a 32-bit or 64-bit process.
-
-#### sensel-cs
-
-The Sensel C&#35; example can be run on a Windows machine in Visual Studio after the libraries have been installed.
-
-The C&#35; wrapper can be found in SenselAPI.cs and can dynamically load either the 32-bit or 64-bit library. 
+The sensel-examples directory includes examples for C, C&#35;, and Python to demonstrate how to use the Sensel libraries for each language. 
 
 ### Sensel Examples
 
@@ -70,6 +52,10 @@ Example 2 demonstrates how to connect to a Sensel Device, start scanning for con
 #### example-3-forces
 
 Example 3 demonstrates how to connect to a Sensel Device, start scanning for forces, and read a frame of force data. In this example, all the forces are being summed to report the total force.
+
+#### example-4-multi
+
+Example 4 demonstrates how to connect to multiple Sensel Devices, start scanning for contacts, and read a frame of data for contacts.
 
 ## sensel-lib
 

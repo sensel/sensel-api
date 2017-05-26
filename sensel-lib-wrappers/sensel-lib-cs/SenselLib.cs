@@ -53,82 +53,82 @@ namespace Sensel
             LoadLibrary(@"C:\Program Files\Sensel\SenselLib\" + (IntPtr.Size == 8 ? "x64" : "x86") + @"\LibSensel.dll");
         }
 
-        [DllImport("kernel32")]
+        [DllImport("kernel32.dll")]
         private static extern IntPtr LoadLibrary(string fileName);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetDeviceList(ref SenselDeviceList device_list);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselOpenDeviceByID(ref IntPtr handle, byte idx);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselClose(IntPtr handle);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselSoftReset(IntPtr handle);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetSensorInfo(IntPtr handle, ref SenselSensorInfo info);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselAllocateFrameData(IntPtr handle, ref SenselFrameData data);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselFreeFrameData(IntPtr handle, SenselFrameData data);
         
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselSetScanDetail(IntPtr handle, SenselScanDetail detail);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetScanDetail(IntPtr handle, ref SenselScanDetail detail);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetSupportedFrameContent(IntPtr handle, ref byte content);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselSetFrameContent(IntPtr handle, byte content);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetFrameContent(IntPtr handle, ref byte content);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselStartScanning(IntPtr handle);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselStopScanning(IntPtr handle);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselReadSensor(IntPtr handle);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetNumAvailableFrames(IntPtr handle, ref Int32 num_avail_frames);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetFrame(IntPtr handle, SenselFrameData data);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselSetDynamicBaselineEnabled(IntPtr handle, byte val);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetDynamicBaselineEnabled(IntPtr handle, ref byte val);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetNumAvailableLEDs(IntPtr handle, ref byte num_leds);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetMaxLEDBrightness(IntPtr handle, ref byte max_brightness);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselSetLEDBrightness(IntPtr handle, byte led_id, UInt16 brightness);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetLEDBrightness(IntPtr handle, byte led_id, ref UInt16 brightness);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetPowerButtonPressed(IntPtr handle, ref byte num_leds);
 
-        [DllImport("LibSensel")]
+        [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetFirmwareInfo(IntPtr handle, ref SenselFirmwareInfo fw_info);
     }
 }
