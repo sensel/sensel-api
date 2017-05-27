@@ -44,6 +44,8 @@ int main(int argc, char **argv)
 	if (list.num_devices == 0)
 	{
 		fprintf(stdout, "No device found\n");
+		fprintf(stdout, "Press Enter to exit example\n");
+		getchar();
 		return 0;
 	}
 
@@ -60,5 +62,9 @@ int main(int argc, char **argv)
 	fprintf(stdout, "Height: %fmm\n", sensor_info.height);
 	fprintf(stdout, "Cols: %d\n", sensor_info.num_cols);
 	fprintf(stdout, "Rows: %d\n", sensor_info.num_rows);
+    
+    fprintf(stdout, "Press Enter to exit example\n");
+    getchar();
+    
 	return 0;
 }

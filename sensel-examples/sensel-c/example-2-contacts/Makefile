@@ -12,7 +12,7 @@ CC = gcc
 
 CFLAGS = -c -std=c99 -Wall -Werror -O2
 
-LDFLAGS = -lsensel 
+LDFLAGS = -lsensel -lpthread
 
 all: cleanobj $(OBJ)
 	mkdir -p $(OBJPRFX)/obj

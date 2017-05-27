@@ -46,13 +46,14 @@ namespace SenselExamples
                 SenselFirmwareInfo fw_info = sensel_device.GetFirmwareInfo();
                 Console.WriteLine("Sensel Device: " + System.Text.Encoding.Default.GetString(list.devices[0].serial_num));
                 Console.WriteLine("Firmware Version: " + fw_info.fw_version_major + "." + fw_info.fw_version_minor + "." + fw_info.fw_version_build);
-                Console.WriteLine("Width: " + sensor_info.width+"mm");
+                Console.WriteLine("Width: " + sensor_info.width + "mm");
                 Console.WriteLine("Height: " + sensor_info.height + "mm");
                 Console.WriteLine("Cols: " + sensor_info.num_cols);
                 Console.WriteLine("Rows: " + sensor_info.num_rows);
                 sensel_device.Close();
             }
-            Thread.Sleep(4000);
+            Console.WriteLine("Press any key to exit.");
+            while (!Console.KeyAvailable){}
         }
     }
 }

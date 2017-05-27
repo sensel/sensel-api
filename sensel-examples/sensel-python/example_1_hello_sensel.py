@@ -42,4 +42,5 @@ if __name__ == "__main__":
         print "Cols: "+str(info.num_cols)
         print "Rows: "+str(info.num_rows)
         error = sensel.close(handle)
+        raw_input("Press Enter to exit...")
     

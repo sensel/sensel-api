@@ -25,11 +25,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef WIN32
+    #include <windows.h>
+#else
+    #include <pthread.h>
+#endif
 #include "sensel.h"
 #include "sensel_device.h"
 
-//The number of times the example should read from the Sensel device before exiting
-#define TEST_SCAN_NUM_LOOPS 500
+static bool enter_pressed = false;
+
+void * waitForEnter()
+{
+    getchar();
+    enter_pressed = true;
+    return 0;
+}
 
 int main(int argc, char **argv)
 {
@@ -49,6 +60,8 @@ int main(int argc, char **argv)
 	if (list.num_devices == 0)
 	{
 		fprintf(stdout, "No device found\n");
+		fprintf(stdout, "Press Enter to exit example\n");
+		getchar();
 		return 0;
 	}
 
@@ -63,9 +76,17 @@ int main(int argc, char **argv)
 	senselAllocateFrameData(handle, &frame);
 	//Start scanning the Sensel device
 	senselStartScanning(handle);
-	
-	for (int n = 0; n < TEST_SCAN_NUM_LOOPS; n++)
-	{
+    
+    fprintf(stdout, "Press Enter to exit example\n");
+    #ifdef WIN32
+        HANDLE thread = CreateThread(NULL, 0, waitForEnter, NULL, 0, NULL);
+    #else
+        pthread_t thread;
+        pthread_create(&thread, NULL, waitForEnter, NULL);
+    #endif
+    
+    while (!enter_pressed)
+    {
 		unsigned int num_frames = 0;
 		//Read all available data from the Sensel device
 		senselReadSensor(handle);

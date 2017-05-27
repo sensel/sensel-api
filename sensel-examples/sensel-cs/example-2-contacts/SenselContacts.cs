@@ -37,42 +37,46 @@ namespace SenselExamples
         {
             SenselDeviceList list = SenselDevice.GetDeviceList();
             Console.WriteLine("Num Devices: " + list.num_devices);
-            if (list.num_devices != 0)
+            if (list.num_devices == 0)
             {
-                SenselDevice sensel_device = new SenselDevice();
-                sensel_device.OpenDeviceByID(list.devices[0].idx);
-                sensel_device.SetFrameContent(SenselDevice.FRAME_CONTENT_CONTACTS_MASK);
-                sensel_device.StartScanning();
-                for (int c = 0; c < 500; c++)
-                {
-                    sensel_device.ReadSensor();
-                    int num_frames = sensel_device.GetNumAvailableFrames();
-                    for (int f = 0; f < num_frames; f++)
-                    {
-                        SenselFrame frame = sensel_device.GetFrame();
-                        if (frame.n_contacts > 0)
-                        {
-                            Console.WriteLine("\nNum Contacts: " + frame.n_contacts);
-                            for (int i = 0; i < frame.n_contacts; i++)
-                            {
-                                Console.WriteLine("Contact ID: " + frame.contacts[i].id);
-                                if (frame.contacts[i].state == (int)SenselContactState.CONTACT_START)
-                                    sensel_device.SetLEDBrightness(frame.contacts[i].id, 100);
-                                if (frame.contacts[i].state == (int)SenselContactState.CONTACT_END)
-                                    sensel_device.SetLEDBrightness(frame.contacts[i].id, 0);
+                Console.WriteLine("No devices found.");
+                Console.WriteLine("Press any key to exit.");
+                while (!Console.KeyAvailable) { }
+                return;
+            }
+            SenselDevice sensel_device = new SenselDevice();
+            sensel_device.OpenDeviceByID(list.devices[0].idx);
+            sensel_device.SetFrameContent(SenselDevice.FRAME_CONTENT_CONTACTS_MASK);
+            sensel_device.StartScanning();
 
-                            }
+            Console.WriteLine("Press any key to exit");
+            while (!Console.KeyAvailable) { 
+                sensel_device.ReadSensor();
+                int num_frames = sensel_device.GetNumAvailableFrames();
+                for (int f = 0; f < num_frames; f++)
+                {
+                    SenselFrame frame = sensel_device.GetFrame();
+                    if (frame.n_contacts > 0)
+                    {
+                        Console.WriteLine("\nNum Contacts: " + frame.n_contacts);
+                        for (int i = 0; i < frame.n_contacts; i++)
+                        {
+                            Console.WriteLine("Contact ID: " + frame.contacts[i].id);
+                            if (frame.contacts[i].state == (int)SenselContactState.CONTACT_START)
+                                sensel_device.SetLEDBrightness(frame.contacts[i].id, 100);
+                            if (frame.contacts[i].state == (int)SenselContactState.CONTACT_END)
+                                sensel_device.SetLEDBrightness(frame.contacts[i].id, 0);
                         }
                     }
                 }
-                byte num_leds = sensel_device.GetNumAvailableLEDs();
-                for(int i = 0; i < num_leds; i++)
-                {
-                    sensel_device.SetLEDBrightness((byte)i, 0);
-                }
-                sensel_device.StopScanning();
-                sensel_device.Close();
             }
+            byte num_leds = sensel_device.GetNumAvailableLEDs();
+            for(int i = 0; i < num_leds; i++)
+            {
+                sensel_device.SetLEDBrightness((byte)i, 0);
+            }
+            sensel_device.StopScanning();
+            sensel_device.Close();
         }
     }
 }

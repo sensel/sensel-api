@@ -23,7 +23,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		18E2C9781E9DA29E009F094B /* SenselContacts */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SenselContacts; sourceTree = BUILT_PRODUCTS_DIR; };
+		18E2C9781E9DA29E009F094B /* SenselMulti */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SenselMulti; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E2C9821E9DA2C8009F094B /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = main.c; path = src/main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,7 +49,7 @@
 		18E2C9791E9DA29E009F094B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				18E2C9781E9DA29E009F094B /* SenselContacts */,
+				18E2C9781E9DA29E009F094B /* SenselMulti */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -57,9 +57,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		18E2C9771E9DA29E009F094B /* SenselContacts */ = {
+		18E2C9771E9DA29E009F094B /* SenselMulti */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 18E2C97F1E9DA29E009F094B /* Build configuration list for PBXNativeTarget "SenselContacts" */;
+			buildConfigurationList = 18E2C97F1E9DA29E009F094B /* Build configuration list for PBXNativeTarget "SenselMulti" */;
 			buildPhases = (
 				18E2C9741E9DA29E009F094B /* Sources */,
 				18E2C9751E9DA29E009F094B /* Frameworks */,
@@ -69,9 +69,9 @@
 			);
 			dependencies = (
 			);
-			name = SenselContacts;
-			productName = SenselContacts;
-			productReference = 18E2C9781E9DA29E009F094B /* SenselContacts */;
+			name = SenselMulti;
+			productName = SenselMulti;
+			productReference = 18E2C9781E9DA29E009F094B /* SenselMulti */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -90,7 +90,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 18E2C9731E9DA29E009F094B /* Build configuration list for PBXProject "SenselContacts" */;
+			buildConfigurationList = 18E2C9731E9DA29E009F094B /* Build configuration list for PBXProject "SenselMulti" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				18E2C9771E9DA29E009F094B /* SenselContacts */,
+				18E2C9771E9DA29E009F094B /* SenselMulti */,
 			);
 		};
 /* End PBXProject section */
@@ -233,7 +233,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		18E2C9731E9DA29E009F094B /* Build configuration list for PBXProject "SenselContacts" */ = {
+		18E2C9731E9DA29E009F094B /* Build configuration list for PBXProject "SenselMulti" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E2C97D1E9DA29E009F094B /* Debug */,
@@ -242,7 +242,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		18E2C97F1E9DA29E009F094B /* Build configuration list for PBXNativeTarget "SenselContacts" */ = {
+		18E2C97F1E9DA29E009F094B /* Build configuration list for PBXNativeTarget "SenselMulti" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				18E2C9801E9DA29E009F094B /* Debug */,

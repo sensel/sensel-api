@@ -26,6 +26,15 @@ import sys
 sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
 import sensel
 import binascii
+import threading
+
+enter_pressed = False;
+
+def waitForEnter():
+    global enter_pressed
+    raw_input("Press Enter to exit...")
+    enter_pressed = True
+    return
 
 def openSensel():
     handle = None
@@ -63,7 +72,10 @@ if __name__ == "__main__":
     if handle != None:
         (error, info) = sensel.getSensorInfo(handle)
         frame = initFrame()
-        for i in range(500):
+        
+        t = threading.Thread(target=waitForEnter)
+        t.start()
+        while(enter_pressed == False):
             scanFrames(frame, info)
         closeSensel(frame)
     
