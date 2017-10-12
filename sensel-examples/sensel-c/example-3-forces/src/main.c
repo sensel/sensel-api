@@ -35,7 +35,11 @@
 
 static bool enter_pressed = false;
 
+#ifdef WIN32
+DWORD WINAPI waitForEnter()
+#else
 void * waitForEnter()
+#endif
 {
     getchar();
     enter_pressed = true;

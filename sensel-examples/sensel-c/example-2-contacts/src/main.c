@@ -36,7 +36,11 @@
 static const char* CONTACT_STATE_STRING[] = { "CONTACT_INVALID","CONTACT_START", "CONTACT_MOVE", "CONTACT_END" };
 static bool enter_pressed = false;
 
+#ifdef WIN32
+DWORD WINAPI waitForEnter()
+#else
 void * waitForEnter()
+#endif
 {
     getchar();
     enter_pressed = true;
