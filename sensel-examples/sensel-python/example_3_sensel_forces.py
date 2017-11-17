@@ -22,60 +22,72 @@
 # DEALINGS IN THE SOFTWARE.
 ##########################################################################
 
+# Python 3 compatibility
+from __future__ import print_function
+try:
+    input = raw_input
+except NameError:
+    pass
+
+import threading
 import sys
 sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
 import sensel
-import binascii
-import threading
 
-enter_pressed = False;
+enter_pressed = False
 
-def waitForEnter():
+
+def wait_for_enter():
     global enter_pressed
-    raw_input("Press Enter to exit...")
+    input('Press Enter to exit...')
     enter_pressed = True
     return
 
-def openSensel():
+
+def open_sensel():
     handle = None
-    (error, device_list) = sensel.getDeviceList()
+    error, device_list = sensel.getDeviceList()
     if device_list.num_devices != 0:
-        (error, handle) = sensel.openDeviceByID(device_list.devices[0].idx)
+        error, handle = sensel.openDeviceByID(device_list.devices[0].idx)
     return handle
 
-def initFrame():
+
+def init_frame():
     error = sensel.setFrameContent(handle, sensel.FRAME_CONTENT_PRESSURE_MASK)
-    (error, frame) = sensel.allocateFrameData(handle)
+    error, frame = sensel.allocateFrameData(handle)
     error = sensel.startScanning(handle)
     return frame
 
-def scanFrames(frame, info):
+
+def scan_frames(frame, info):
     error = sensel.readSensor(handle)
-    (error, num_frames) = sensel.getNumAvailableFrames(handle)
+    error, num_frames = sensel.getNumAvailableFrames(handle)
     for i in range(num_frames):
         error = sensel.getFrame(handle, frame)
-        printFrame(frame, info)
+        print_frame(frame, info)
 
-def printFrame(frame, info):
+
+def print_frame(frame, info):
     total_force = 0.0
-    for n in range(info.num_rows*info.num_cols):
+    for n in range(info.num_rows * info.num_cols):
         total_force += frame.force_array[n]
-    print "Total Force: "+str(total_force)
+    print('Total Force: %s' % total_force)
 
-def closeSensel(frame):
+
+def close_sensel(frame):
     error = sensel.freeFrameData(handle, frame)
     error = sensel.stopScanning(handle)
     error = sensel.close(handle)
 
-if __name__ == "__main__":
-    handle = openSensel()
-    if handle != None:
-        (error, info) = sensel.getSensorInfo(handle)
-        frame = initFrame()
-        
-        t = threading.Thread(target=waitForEnter)
+if __name__ == '__main__':
+    handle = open_sensel()
+    if handle:
+        error, info = sensel.getSensorInfo(handle)
+        frame = init_frame()
+
+        t = threading.Thread(target=wait_for_enter)
         t.start()
-        while(enter_pressed == False):
-            scanFrames(frame, info)
-        closeSensel(frame)
-    
+        while not enter_pressed:
+            scan_frames(frame, info)
+        close_sensel(frame)
+
