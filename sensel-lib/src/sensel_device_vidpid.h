@@ -29,15 +29,13 @@ typedef struct device_vidpid_s
 {
   char            *name;
   unsigned short  vid;
-  unsigned short  pid;
   char            *vidpidstr;
 } DeviceVIDPID;
 
 // List of all VID PIDs this API supports
 DeviceVIDPID supported_devices[] =
 {
-  {  "Morph" , 0x2C2F, 0x0003, "VID_2C2F&PID_0003" },
-  {  "Squirt", 0x2C2F, 0x0005, "VID_2C2F&PID_0005" },
+  {  "Sensel Device" , 0x2C2F, "VID_2C2F" },
 };
 
 #define NUM_SUPPORTED_DEVS ((sizeof(supported_devices) / sizeof(DeviceVIDPID)))

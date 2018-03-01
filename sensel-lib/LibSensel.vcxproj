@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="src\sensel.h" />
     <ClInclude Include="src\sensel_device.h" />
+    <ClInclude Include="src\sensel_device_vidpid.h" />
     <ClInclude Include="src\sensel_protocol.h" />
     <ClInclude Include="src\sensel_register.h" />
     <ClInclude Include="src\sensel_register_map.h" />
