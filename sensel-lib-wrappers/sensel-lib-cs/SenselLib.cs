@@ -130,5 +130,18 @@ namespace Sensel
 
         [DllImport("LibSensel.dll")]
         internal extern static SenselStatus senselGetFirmwareInfo(IntPtr handle, ref SenselFirmwareInfo fw_info);
-    }
+
+		[DllImport("LibSensel.dll")]
+		internal extern static SenselStatus senselSetContactsEnableBlobMerge(IntPtr handle, byte val);
+
+		[DllImport("LibSensel.dll")]
+		internal extern static SenselStatus senselGetContactsEnableBlobMerge(IntPtr handle, ref byte val);
+
+		[DllImport("LibSensel.dll")]
+		internal extern static SenselStatus senselSetContactsMask(IntPtr handle, byte mask);
+
+		[DllImport("LibSensel.dll")]
+		internal extern static SenselStatus senselGetContactsMask(IntPtr handle, ref byte mask);
+
+	}
 }

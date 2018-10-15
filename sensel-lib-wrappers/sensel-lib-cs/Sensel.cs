@@ -353,5 +353,34 @@ namespace Sensel
                 throw SenselException();
             return fw_info;
         }
-    }
+
+		public void SetContactsEnableBlobMerge(byte val)
+		{
+			if (SenselLib.senselSetContactsEnableBlobMerge(handle, val) != SenselStatus.SENSEL_OK)
+				throw SenselException();
+		}
+
+		public byte GetContactsEnableBlobMerge()
+		{
+			byte val = 0;
+			if (SenselLib.senselGetContactsEnableBlobMerge(handle, ref val) != SenselStatus.SENSEL_OK)
+				throw SenselException();
+			return val;
+		}
+
+		public void SetContactsMask(byte mask)
+		{
+			if (SenselLib.senselSetContactsMask(handle, mask) != SenselStatus.SENSEL_OK)
+				throw SenselException();
+		}
+
+		public byte GetContactsMask()
+		{
+			byte val = 0;
+			if (SenselLib.senselGetContactsMask(handle, ref val) != SenselStatus.SENSEL_OK)
+				throw SenselException();
+			return val;
+		}
+
+	}
 }
