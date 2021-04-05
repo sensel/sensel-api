@@ -63,8 +63,17 @@ int main(int argc, char **argv)
 	fprintf(stdout, "Cols: %d\n", sensor_info.num_cols);
 	fprintf(stdout, "Rows: %d\n", sensor_info.num_rows);
     
-    fprintf(stdout, "Press Enter to exit example\n");
-    getchar();
-    
+  fprintf(stdout, "Press Enter to exit example\n");
+
+  /*
+  //Disable serial block, which allows both serial and MIDI at the same time. After disabling, you must close device and wait for the timeout (3 seconds) to exit before opening the device again.
+  unsigned char SERIAL_BLOCK_DISABLE_REG = 0xD4;
+  unsigned char data[1];
+  data[0] = 0;
+  senselWriteReg(handle, SERIAL_BLOCK_DISABLE_REG, 1, data);
+  */
+
+  getchar();
+
 	return 0;
 }
