@@ -26,3 +26,4 @@ You can open your System Preferences -> Security and Privacy and allow the app t
 
 This can be a bit of a finicky process and take a few tries. It's best to run this with the SenselApp closed and any patches with the 'sensel' objects in Max closed.
 
+[Here is an example](https://youtu.be/m5euqiQ_4xk) of using the DisableSerialBlock in combination with Bitwig Studio and Cycling 74 Max (using jit.sensel).
