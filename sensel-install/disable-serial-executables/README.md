@@ -2,6 +2,8 @@ The "SenselDisableSerialBlock" executables are simple apps that allow you to use
 
 Basic Instructions:
 
+First, you'll need to install the API, using the installers in the [parent directory](https://github.com/sensel/sensel-api/tree/master/sensel-install). Then: 
+
 * Connect your Morph via USB to your computer. 
 * Launch the program from the Finder or Explorer with a double-click. This opens a terminal window.
 * You'll get feedback that a device is found (or not). 
