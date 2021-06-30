@@ -22,25 +22,24 @@
 # DEALINGS IN THE SOFTWARE.
 ##########################################################################
 
+# Python 3 compatibility
+from __future__ import print_function
+
 import sys
 sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
 import sensel
-import binascii
 
-if __name__ == "__main__":
-
+if __name__ == '__main__':
     handle = None
-    (error, device_list) = sensel.getDeviceList()
-    if device_list.num_devices != 0:
-        (error, handle) = sensel.openDeviceByID(device_list.devices[0].idx)
-    if handle != None:
-        (error, info) = sensel.getSensorInfo(handle)
+    error, device_list = sensel.getDeviceList()
+    if device_list.num_devices:
+        error, handle = sensel.openDeviceByID(device_list.devices[0].idx)
+    if handle:
+        error, info = sensel.getSensorInfo(handle)
 
-        print "\nSensel Device: "+str(bytearray(device_list.devices[0].serial_num))
-        print "Width: "+str(info.width)+"mm"
-        print "Height: "+str(info.height)+"mm"
-        print "Cols: "+str(info.num_cols)
-        print "Rows: "+str(info.num_rows)
+        print('\nSensel Device: %s' % bytearray(device_list.devices[0].serial_num).decode('utf-8'))
+        print('Width: %smm' % info.width)
+        print('Height: %smm' % info.height)
+        print('Cols: %s' % info.num_cols)
+        print('Rows: %s' % info.num_rows)
         error = sensel.close(handle)
-        raw_input("Press Enter to exit...")
-    

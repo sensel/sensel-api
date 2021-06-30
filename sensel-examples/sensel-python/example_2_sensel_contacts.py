@@ -22,66 +22,79 @@
 # DEALINGS IN THE SOFTWARE.
 ##########################################################################
 
+# Python 3 compatibility
+from __future__ import print_function
+try:
+    input = raw_input
+except NameError:
+    pass
+
 import sys
-sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
-import sensel
-import binascii
 import threading
 
-enter_pressed = False;
+sys.path.append('../../sensel-lib-wrappers/sensel-lib-python')
+import sensel
 
-def waitForEnter():
+enter_pressed = False
+
+
+def wait_for_enter():
     global enter_pressed
-    raw_input("Press Enter to exit...")
+    input('Press Enter to exit...')
     enter_pressed = True
     return
 
-def openSensel():
+
+def open_sensel():
     handle = None
     (error, device_list) = sensel.getDeviceList()
     if device_list.num_devices != 0:
         (error, handle) = sensel.openDeviceByID(device_list.devices[0].idx)
     return handle
 
-def initFrame():
+
+def init_frame():
     error = sensel.setFrameContent(handle, sensel.FRAME_CONTENT_CONTACTS_MASK)
-    (error, frame) = sensel.allocateFrameData(handle)
+    error, frame = sensel.allocateFrameData(handle)
     error = sensel.startScanning(handle)
     return frame
 
-def scanFrames(frame, info):
+
+def scan_frames(frame, info):
     error = sensel.readSensor(handle)
-    (error, num_frames) = sensel.getNumAvailableFrames(handle)
+    error, num_frames = sensel.getNumAvailableFrames(handle)
     for i in range(num_frames):
         error = sensel.getFrame(handle, frame)
-        printFrame(frame,info)
+        print_frame(frame, info)
 
-def printFrame(frame, info):
-    if frame.n_contacts > 0:
-        print "\nNum Contacts: ", frame.n_contacts
+
+def print_frame(frame, info):
+    if frame.n_contacts:
+        print()
+        print('Num Contacts:', frame.n_contacts)
         for n in range(frame.n_contacts):
             c = frame.contacts[n]
-            print "Contact ID: ", c.id
+            print('Contact ID:', c.id)
             if c.state == sensel.CONTACT_START:
                 sensel.setLEDBrightness(handle, c.id, 100)
             elif c.state == sensel.CONTACT_END:
                 sensel.setLEDBrightness(handle, c.id, 0)
 
-def closeSensel(frame):
+
+def close_sensel(frame):
     error = sensel.freeFrameData(handle, frame)
     error = sensel.stopScanning(handle)
     error = sensel.close(handle)
 
-if __name__ == "__main__":
-    global enter_pressed
-    handle = openSensel()
-    if handle != None:
-        (error, info) = sensel.getSensorInfo(handle)
-        frame = initFrame()
 
-        t = threading.Thread(target=waitForEnter)
+if __name__ == '__main__':
+    handle = open_sensel()
+    if handle:
+        error, info = sensel.getSensorInfo(handle)
+        frame = init_frame()
+
+        t = threading.Thread(target=wait_for_enter)
         t.start()
-        while(enter_pressed == False):
-            scanFrames(frame, info)
-        closeSensel(frame)
-    
+        while not enter_pressed:
+            scan_frames(frame, info)
+        close_sensel(frame)
