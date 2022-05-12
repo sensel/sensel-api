@@ -8,6 +8,9 @@ The Sensel API allows users to communicate with Sensel devices.
 
 [Sensel Decompress Lib Documentation](http://guide.sensel.com/sensel_decompress_h/)
 
+## Apple Silicon Support
+
+There are currently no libraries compiled for Apple Silicon. 
 
 ## Getting Started
 
